@@ -6,6 +6,7 @@
                 <div id="map">
                     <iframe src="{{$map->map_link}}" width="100%" height="600px" frameborder="0" style="border:0" allowfullscreen></iframe>
                 </div>
+                @endforeach 
             </div>
             <div class="col-lg-6 col-md-6 col-xs-12">
                 <div class="contact-form">
