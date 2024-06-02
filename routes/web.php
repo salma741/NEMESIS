@@ -37,7 +37,7 @@ Route::controller(AuthController::class)->group(function() {
 });
 
 Route::get('/contact-us', [ContactController::class, 'index'])->name('contact.index');
-Route::post('/contact-us', [ContactController::class, 'send'])->name('contact.send');
+Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
 Route::get('/contact/{id}', [ContactController::class, 'show'])->name('contact.show');
 Route::delete('/contact/{id}', [ContactController::class, 'destroy'])->name('contact.destroy');
 
