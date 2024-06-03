@@ -49,7 +49,7 @@
                             @csrf
                             @method('delete')
                             <button type="submit" class="btn btn-sm btn-danger"
-                                onclick="return confirm('Anda yakin ingin menghapus data ini {{ $map->name }}?')">Delete
+                                onclick="return confirm('Anda yakin ingin menghapus data ini {{ $configuration->name }}?')">Delete
                             </button>
                         </form>
                     </div>
