@@ -17,7 +17,7 @@ class ConfigurationController extends Controller
             'configurations' => $configurations
         ];
 
-        return view('map.index', compact('maps'), $data);
+        return view('map.index', compact('configurations'), $data);
     }
 
      /**
