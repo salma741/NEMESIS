@@ -57,8 +57,7 @@ Route::middleware(['auth', 'user-access:member'])->group(function () {
 
 // Normal Admin Route List
 Route::middleware(['auth', 'user-access:super admin'])->group(function () {
-    Route::get('/admin/home', [AdminController::class, 'adminHome'])->name('admin.home');
-    Route::get('/admin/dashboard', [ContactController::class, 'adminDashboard'])->name('admin.dashboard');
+    Route::get('admin/home', [AdminController::class, 'adminHome'])->name('admin/home');
     Route::resource('/user', UserController::class);
     Route::resource('/check-status', CheckStatusController::class);
     Route::resource('member-package', MemberPackageController::class);
