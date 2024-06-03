@@ -13,6 +13,7 @@ use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\SupplementController;
 use App\Http\Controllers\TrainerController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,6 +29,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'show'])->name('profile.index');
+
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::post('/profile/edit', [ProfileController::class, 'update'])->name('profile.update');
+});
 
 Route::controller(AuthController::class)->group(function() {
     Route::get('auth', 'index')->name('login');
