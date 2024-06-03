@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Carousel;
-use App\Models\Map;
+use App\Models\Configuration;
 use App\Models\MemberPackage;
 use App\Models\Program;
 use App\Models\Supplement;
@@ -24,7 +24,7 @@ class HomeController extends Controller
             "trainers" => Trainer::get(),
             "carousels" => Carousel::get(),
             "memberPackages" => MemberPackage::get(),
-            "maps" => Map::get(),
+            "configurations" => Configuration::get(),
         ];
         
         return view('home',  $data);
