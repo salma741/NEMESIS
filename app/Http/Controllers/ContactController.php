@@ -54,9 +54,9 @@ class ContactController extends Controller
             $contact = Contact::findOrFail($id);
             $contact->delete(); // menggunakan soft delete
 
-            return redirect()->route('contact.index')->with("successMessage", "Data berhasil dihapus!");
+            return redirect("contact-us")->with("successMessage", "Data berhasil dihapus!");
         } catch (\Throwable $th) {
-            return redirect()->route('contact.index')->with("errorMessage", "Data gagal dihapus!");
+            return redirect("contact-us")->with("errorMessage", "Data gagal dihapus!");
         }
     }
 

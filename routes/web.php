@@ -4,9 +4,9 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CarouselController;
 use App\Http\Controllers\CheckStatusController;
+use App\Http\Controllers\ConfigurationController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\MapController;
 use App\Http\Controllers\MemberPackageController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\RegistrationController;
@@ -43,10 +43,7 @@ Route::controller(AuthController::class)->group(function() {
     Route::get('logout', 'logout')->name('logout')->middleware('auth');
 });
 
-Route::get('/contact-us', [ContactController::class, 'index'])->name('contact.index');
 Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
-Route::get('/contact/{id}', [ContactController::class, 'show'])->name('contact.show');
-Route::delete('/contact/{id}', [ContactController::class, 'destroy'])->name('contact.destroy');
 
 
 
@@ -66,7 +63,7 @@ Route::middleware(['auth', 'user-access:super admin'])->group(function () {
     Route::resource('trainer', TrainerController::class);
     Route::resource('supplement', SupplementController::class);
     Route::resource('carousel', CarouselController::class);
-    Route::resource('map', MapController::class);
+    Route::resource('map', ConfigurationController::class);
     Route::resource('contact-us', ContactController::class);
 });
 

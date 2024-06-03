@@ -36,11 +36,11 @@
             <td>{{ $contact->message }}</td>
             <td>
                 <div class="d-flex">
-                <a href="{{ URL::to('contact/' . $contact->id) }}" class="btn btn-sm btn-info mr-2">
+                <a href="{{ URL::to('contact-us/' . $contact->id) }}" class="btn btn-sm btn-info mr-2">
                 Show</a>
                 <!-- <a href="{{ URL::to('contact/' . $contact->id. '/edit') }}" class="btn btn-sm btn-warning mr-2">
                 Edit</a> -->
-                <form action="{{ URL::to('contact/' . $contact->id) }}" method="post">
+                <form action="{{ URL::to('contact-us/' . $contact->id) }}" method="post">
                     @csrf
                     @method('delete')
                     <button type="submit" class="btn btn-sm btn-danger"

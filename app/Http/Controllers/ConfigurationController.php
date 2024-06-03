@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Map;
+use App\Models\Configuration;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
-class MapController extends Controller
+class ConfigurationController extends Controller
 {
     public function index()
     {
-        $maps = Map::all(); // Mendapatkan semua maps
+        $configurations = Configuration::all(); // Mendapatkan semua maps
     
         $data = [
             'title' => 'Maps',
-            'mamps' => $maps
+            'configurations' => $configurations
         ];
 
         return view('map.index', compact('maps'), $data);
@@ -52,7 +52,7 @@ class MapController extends Controller
         ], $messages);
     
         try {
-            Map::create($data);
+            Configuration::create($data);
             Alert::success('Sukses', 'Data berhasil ditambahkan.');
             return redirect()->route('map.index');
         } catch (\Throwable $th) {
@@ -63,14 +63,14 @@ class MapController extends Controller
 
     public function edit(int $id)
     {
-        $map = Map::find($id);
-        if (!$map) {
+        $configuration = Configuration::find($id);
+        if (!$configuration) {
             return redirect()->route('map.index')->with("errorMessage", 'Map tidak dapat ditemukan');
         }
 
         $data = [
             'title' => 'Edit Map',
-            'map' => $map
+            'configuration' => $configuration
         ];
 
         return view('map.form', $data);
@@ -93,8 +93,8 @@ class MapController extends Controller
         ], $messages);
     
         try {
-            $map = Map::findOrFail($id);
-            $map->update($data);
+            $configuration = Configuration::findOrFail($id);
+            $configuration->update($data);
             Alert::success('Sukses', 'Data berhasil diperbarui.');
             return redirect()->route('map.index');
         } catch (\Throwable $th) {
@@ -105,10 +105,10 @@ class MapController extends Controller
 
     public function show(string $id)
     {
-        $map = Map::find($id);
+        $configuration = Configuration::find($id);
         $data = [
             "title" => "Map Detail",
-            "map" => $map
+            "configuration" => $configuration
         ];
         return view('map.detail', $data);
     }
@@ -117,8 +117,8 @@ class MapController extends Controller
     public function destroy(string $id)
     {
         try {
-            $map = Map::findOrFail($id);
-            $map->delete();
+            $configuration = Configuration::findOrFail($id);
+            $configuration->delete();
 
             return redirect()->route('map.index')->with("successMessage", "Data berhasil dihapus!");
         } catch (\Throwable $th) {

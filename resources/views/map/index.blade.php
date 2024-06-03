@@ -30,22 +30,22 @@
         </tr>
     </thead>
     <tbody>
-        @foreach($maps as $index => $map)
+        @foreach($configurations as $index => $configuration)
             <tr>
                 <td>{{ $index + 1 }}</td>
-                <td>{{ $map->name }}</td>
-                <td>{{ $map->address }}</td>
-                <td>{{ $map->phone }}</td>
-                <td>{{ $map->map_link }}</td>
+                <td>{{ $configuration->name }}</td>
+                <td>{{ $configuration->address }}</td>
+                <td>{{ $configuration->phone }}</td>
+                <td>{{ $configuration->map_link }}</td>
                 <td>
                     <div class="d-flex">
-                        <a href="{{ URL::to('map/' . $map->id) }}" class="btn btn-sm btn-info mr-2">
+                        <a href="{{ URL::to('map/' . $configuration->id) }}" class="btn btn-sm btn-info mr-2">
                             Show
                         </a>
-                        <a href="{{ URL::to('map/' . $map->id . '/edit') }}" class="btn btn-sm btn-warning mr-2">
+                        <a href="{{ URL::to('map/' . $configuration->id . '/edit') }}" class="btn btn-sm btn-warning mr-2">
                             Edit
                         </a>
-                        <form action="{{ URL::to('map/' . $map->id) }}" method="post">
+                        <form action="{{ URL::to('map/' . $configuration->id) }}" method="post">
                             @csrf
                             @method('delete')
                             <button type="submit" class="btn btn-sm btn-danger"
