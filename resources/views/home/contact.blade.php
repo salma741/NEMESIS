@@ -2,9 +2,11 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-6 col-md-6 col-xs-12">
+            @foreach ($maps as $index => $map)
                 <div id="map">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d4057925.3230426307!2d105.8911898!3d-6.6694985!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e70894a399ad0a3%3A0x190a377f8b120a82!2sFitsoul%20Gym%20Fitness%20Center!5e0!3m2!1sid!2sid!4v1716818599151!5m2!1sid!2sid" width="100%" height="600px" frameborder="0" style="border:0" allowfullscreen></iframe>
+                    <iframe src="{{$map->map_link}}" width="100%" height="600px" frameborder="0" style="border:0" allowfullscreen></iframe>
                 </div>
+                @endforeach 
             </div>
             <div class="col-lg-6 col-md-6 col-xs-12">
                 <div class="contact-form">
