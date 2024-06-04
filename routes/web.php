@@ -63,7 +63,7 @@ Route::middleware(['auth', 'user-access:super admin'])->group(function () {
     Route::resource('trainer', TrainerController::class);
     Route::resource('supplement', SupplementController::class);
     Route::resource('carousel', CarouselController::class);
-    Route::resource('map', ConfigurationController::class);
+    Route::resource('configuration', ConfigurationController::class);
     Route::resource('contact-us', ContactController::class);
 });
 

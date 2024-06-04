@@ -13,11 +13,11 @@ class ConfigurationController extends Controller
         $configurations = Configuration::all(); // Mendapatkan semua maps
     
         $data = [
-            'title' => 'Maps',
+            'title' => 'Configurations',
             'configurations' => $configurations
         ];
 
-        return view('map.index', compact('configurations'), $data);
+        return view('configuration.index', compact('configurations'), $data);
     }
 
      /**
@@ -29,7 +29,7 @@ class ConfigurationController extends Controller
             'title' => 'Add New Maps',
         ];
 
-        return view('map.form', $data);
+        return view('configuration.form', $data);
     }
 
     /**
@@ -54,10 +54,10 @@ class ConfigurationController extends Controller
         try {
             Configuration::create($data);
             Alert::success('Sukses', 'Data berhasil ditambahkan.');
-            return redirect()->route('map.index');
+            return redirect()->route('configuration.index');
         } catch (\Throwable $th) {
             Alert::error('Error', $th->getMessage());
-            return redirect()->route('map.create');
+            return redirect()->route('configuration.create');
         }
     }
 
@@ -65,15 +65,15 @@ class ConfigurationController extends Controller
     {
         $configuration = Configuration::find($id);
         if (!$configuration) {
-            return redirect()->route('map.index')->with("errorMessage", 'Map tidak dapat ditemukan');
+            return redirect()->route('configuration.index')->with("errorMessage", 'Configuration tidak dapat ditemukan');
         }
 
         $data = [
-            'title' => 'Edit Map',
+            'title' => 'Edit Configuration',
             'configuration' => $configuration
         ];
 
-        return view('map.form', $data);
+        return view('configuration.form', $data);
     }
     
     public function update(Request $request, int $id)
@@ -96,10 +96,10 @@ class ConfigurationController extends Controller
             $configuration = Configuration::findOrFail($id);
             $configuration->update($data);
             Alert::success('Sukses', 'Data berhasil diperbarui.');
-            return redirect()->route('map.index');
+            return redirect()->route('configuration.index');
         } catch (\Throwable $th) {
             Alert::error('Error', $th->getMessage());
-            return redirect()->route('map.edit', $id);
+            return redirect()->route('configuration.edit', $id);
         }
     }
 
@@ -107,10 +107,10 @@ class ConfigurationController extends Controller
     {
         $configuration = Configuration::find($id);
         $data = [
-            "title" => "Map Detail",
+            "title" => "Configuration Detail",
             "configuration" => $configuration
         ];
-        return view('map.detail', $data);
+        return view('configuration.detail', $data);
     }
 
 
@@ -120,9 +120,9 @@ class ConfigurationController extends Controller
             $configuration = Configuration::findOrFail($id);
             $configuration->delete();
 
-            return redirect()->route('map.index')->with("successMessage", "Data berhasil dihapus!");
+            return redirect()->route('configuration.index')->with("successMessage", "Data berhasil dihapus!");
         } catch (\Throwable $th) {
-            return redirect()->route('map.index')->with("errorMessage", $th->getMessage());
+            return redirect()->route('configuration.index')->with("errorMessage", $th->getMessage());
         }
     }
 }
