@@ -2,10 +2,10 @@
 @section('container')
 
 @if (isset($configuration))
-<form action="{{ URL::to('map/' . $configuration->id)}}" method="POST" autocomplete="off">
+<form action="{{ URL::to('configuration/' . $configuration->id)}}" method="POST" autocomplete="off">
 @method('put')
 @else
-<form action="{{ URL::to('map')}}" method="POST" autocomplete="off">
+<form action="{{ URL::to('configuration')}}" method="POST" autocomplete="off">
 @endif
 @csrf
 <div class="row">
@@ -51,7 +51,7 @@
             @enderror
         </div>
         <button type="submit" class="btn btn-primary">Save</button>
-        <a href="{{ URL::to('map/') }}" class="btn btn-secondary">Back</a>
+        <a href="{{ URL::to('configuration/') }}" class="btn btn-secondary">Back</a>
     </div>
 </div>
 </form>

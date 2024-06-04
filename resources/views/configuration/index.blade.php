@@ -14,7 +14,7 @@
     </div>
 @endif 
 
-<a href="{{ URL::to('map/create') }}" class="btn btn-primary mb-3">
+<a href="{{ URL::to('configuration/create') }}" class="btn btn-primary mb-3">
     <i class="fas fa-plus" aria-hidden="true"></i> Add
 </a>
 
@@ -39,13 +39,13 @@
                 <td>{{ $configuration->map_link }}</td>
                 <td>
                     <div class="d-flex">
-                        <a href="{{ URL::to('map/' . $configuration->id) }}" class="btn btn-sm btn-info mr-2">
+                        <a href="{{ URL::to('configuration/' . $configuration->id) }}" class="btn btn-sm btn-info mr-2">
                             Show
                         </a>
-                        <a href="{{ URL::to('map/' . $configuration->id . '/edit') }}" class="btn btn-sm btn-warning mr-2">
+                        <a href="{{ URL::to('configuration/' . $configuration->id . '/edit') }}" class="btn btn-sm btn-warning mr-2">
                             Edit
                         </a>
-                        <form action="{{ URL::to('map/' . $configuration->id) }}" method="post">
+                        <form action="{{ URL::to('configuration/' . $configuration->id) }}" method="post">
                             @csrf
                             @method('delete')
                             <button type="submit" class="btn btn-sm btn-danger"

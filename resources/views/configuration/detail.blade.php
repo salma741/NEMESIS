@@ -24,7 +24,7 @@
                 <input type="text" id="map_link" name="map_link" class="form-control" 
                 value="{{ $configuration->map_link }}" readonly>
             </div>
-    <a href="{{ URL::to('map/') }}" class="btn btn-sm btn-secondary">Back</a>
+    <a href="{{ URL::to('configuration/') }}" class="btn btn-sm btn-secondary">Back</a>
     </div>
 </div>
 @endsection
