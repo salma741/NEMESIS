@@ -123,10 +123,10 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ URL::to('/map') }}" class="nav-link {{ Request::is('map') ? 'active' : '' }}">
+                    <a href="{{ URL::to('/configuration') }}" class="nav-link {{ Request::is('map') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-map-pin"></i>
                         <p>
-                            Maps
+                        Configurations
                         </p>
                     </a>
                 </li>
