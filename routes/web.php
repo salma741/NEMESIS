@@ -15,7 +15,7 @@ use App\Http\Controllers\SupplementController;
 use App\Http\Controllers\TrainerController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Route;;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,6 +51,7 @@ Route::post('/contact', [ContactController::class, 'send'])->name('contact.send'
 // Normal Users Route List
 Route::middleware(['auth', 'user-access:member'])->group(function () {
     Route::resource('/registration-member', RegistrationMemberController::class);    
+    Route::resource('/registration-member', RegistrationMemberController::class);
 });
 
 // Normal Admin Route List
@@ -60,7 +61,7 @@ Route::middleware(['auth', 'user-access:super admin'])->group(function () {
     Route::resource('/check-status', CheckStatusController::class);
     Route::resource('member-package', MemberPackageController::class);
     Route::resource('program', ProgramController::class);
-    Route::resource('registration', RegistrationController::class);
+    Route::resource('/registration-admin', RegistrationController::class);
     Route::resource('trainer', TrainerController::class);
     Route::resource('supplement', SupplementController::class);
     Route::resource('carousel', CarouselController::class);

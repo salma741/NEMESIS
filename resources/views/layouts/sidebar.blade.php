@@ -79,7 +79,7 @@
                 @endif
 
                 @if(Auth::check() && (Auth::user()->role == 'super admin' || Auth::user()->role == 'admin'))
-                <li class="nav-item {{ Request::is('registration') || Request::is('check-status') ? 'menu-open' : '' }}">
+                <li class="nav-item {{ Request::is('registration-admin') || Request::is('check-status') ? 'menu-open' : '' }}">
                     <a href="#" class="nav-link {{ Request::is('registration') || Request::is('check-status') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-shopping-cart"></i>
                         <p>
@@ -89,7 +89,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ URL::to('/registration') }}" class="nav-link {{ Request::is('registration') ? 'active' : '' }}">
+                            <a href="{{ URL::to('/registration-admin') }}" class="nav-link {{ Request::is('registration-admin') ? 'active' : '' }}">
                                 <i class="far fa-window-maximize nav-icon"></i>
                                 <p>Registrations</p>
                             </a>
