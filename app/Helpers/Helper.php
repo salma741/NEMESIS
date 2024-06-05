@@ -8,3 +8,10 @@ function NumberFormat($number)
 function DateFormat($date, $Format = "D-M-Y H:m:s"){
     return \Carbon\Carbon::parse($date)->isoFormat($Format);
 }
+
+function AddDay($date, $days){
+    $carbonObject = \Carbon\Carbon::parse($date);
+    
+    return $carbonObject->addDays($days);
+
+}

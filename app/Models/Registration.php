@@ -11,10 +11,16 @@ class Registration extends Model
     use HasFactory, SoftDeletes;
     protected $dates = ['deleted_at'];
     protected $guarded = [];
+    
     public function user(){
         return $this->belongsTo(User::class);
     }
-    public function memberpackage(){
+
+    public function member(){
+        return $this->belongsTo(User::class, 'member_id');
+    }
+
+    public function memberPackage(){
         return $this->belongsTo(MemberPackage::class);
     }
 

@@ -8,7 +8,7 @@
                 <h6>work harder, get stronger</h6>
                 <h2>easy with <em>FITSOUL</em></h2>
                 <div class="main-button scroll-to-section">
-                    <a href="#features">Join Member</a>
+                    <a href="{{URL::to('registration-member')}}">Join Member</a>
                 </div>
             </div>
         </div>
