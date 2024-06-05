@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Trainer;
 use App\Models\Registration;
+use App\Models\Configuration;
 use Illuminate\Http\Request;
 use App\Models\MemberPackage;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -22,6 +22,7 @@ class RegistrationMemberController extends Controller
             'title' => 'Member Registration Data',
             'information' => 'Berikut adalah data registrasi member anda.',
             'registrations' => $registrations,
+            "configurations" => Configuration::get(),
         ];
 
         return view('registration-member.index', $data);
@@ -37,6 +38,7 @@ class RegistrationMemberController extends Controller
             'information' => 'Silahkan registrasi paket anda',
             'memberPackages' => MemberPackage::get(),
             'trainers' => Trainer::get(),
+            "configurations" => Configuration::get(),            
         ];
 
         return view('registration-member.form', $data);

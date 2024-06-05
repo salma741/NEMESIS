@@ -24,7 +24,7 @@ class HomeController extends Controller
             "trainers" => Trainer::get(),
             "carousels" => Carousel::get(),
             "memberPackages" => MemberPackage::get(),
-            "configurations" => Configuration::get(),
+            "configurations" => Configuration::get(), //taruh di variable global
         ];
         
         return view('home',  $data);
