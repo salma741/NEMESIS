@@ -18,11 +18,11 @@ https://templatemo.com/tm-548-training-studio
 
 -->
     <!-- Additional CSS Files -->
-    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bootstrap.min.css')}}">
 
-    <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/font-awesome.css')}}">
 
-    <link rel="stylesheet" href="assets/css/templatemo-training-studio.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/templatemo-training-studio.css')}}">
 
     </head>
     
@@ -45,27 +45,44 @@ https://templatemo.com/tm-548-training-studio
     <!-- ***** Header Area Start ***** -->
     @include('landing-pages-layouts.navbar')
     <!-- ***** Header Area End ***** -->
-
+    @if(!(Request::is('/') || Request::is('home')))
+    <section class="section" id="features">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 offset-lg-3">
+                    <div class="section-heading">
+                        <h2>{{$title}}</h2>
+                        <img src="{{ asset('assets/images/line-dec.png')}}" alt="waves">
+                        <p>{{$information}}</p>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                  @yield("container")
+                </div>
+            </div>
+        </div>
+    </section>
+    @endif
        <!-- ***** Footer Start ***** -->
        @include('landing-pages-layouts.footer')
 
     <!-- jQuery -->
-    <script src="assets/js/jquery-2.1.0.min.js"></script>
+    <script src="{{ asset('assets/js/jquery-2.1.0.min.js')}}"></script>
 
     <!-- Bootstrap -->
-    <script src="assets/js/popper.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="{{ asset('assets/js/popper.js')}}"></script>
+    <script src="{{ asset('assets/js/bootstrap.min.js')}}"></script>
 
     <!-- Plugins -->
-    <script src="assets/js/scrollreveal.min.js"></script>
-    <script src="assets/js/waypoints.min.js"></script>
-    <script src="assets/js/jquery.counterup.min.js"></script>
-    <script src="assets/js/imgfix.min.js"></script> 
-    <script src="assets/js/mixitup.js"></script> 
-    <script src="assets/js/accordions.js"></script>
+    <script src="{{ asset('assets/js/scrollreveal.min.js')}}"></script>
+    <script src="{{ asset('assets/js/waypoints.min.js')}}"></script>
+    <script src="{{ asset('assets/js/jquery.counterup.min.js')}}"></script>
+    <script src="{{ asset('assets/js/imgfix.min.js')}}"></script> 
+    <script src="{{ asset('assets/js/mixitup.js')}}"></script> 
+    <script src="{{ asset('assets/js/accordions.js')}}"></script>
     
     <!-- Global Init -->
-    <script src="assets/js/custom.js"></script>
+    <script src="{{ asset('assets/js/custom.js')}}"></script>
 
   </body>
 </html>
