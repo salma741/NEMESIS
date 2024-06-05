@@ -1,21 +1,21 @@
 <?php
 
-use App\Http\Controllers\AdminController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\CarouselController;
-use App\Http\Controllers\CheckStatusController;
-use App\Http\Controllers\ConfigurationController;
-use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\MemberPackageController;
-use App\Http\Controllers\ProgramController;
-use App\Http\Controllers\RegistrationController;
-use App\Http\Controllers\RegistrationMemberController;
-use App\Http\Controllers\SupplementController;
-use App\Http\Controllers\TrainerController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;;
+use App\Http\Controllers\ProgramController;
+use App\Http\Controllers\TrainerController;
+use App\Http\Controllers\CarouselController;
+use App\Http\Controllers\SupplementController;
+use App\Http\Controllers\CheckStatusController;
+use App\Http\Controllers\RegistrationController;
+use App\Http\Controllers\ConfigurationController;
+use App\Http\Controllers\MemberPackageController;
+use App\Http\Controllers\RegistrationMemberController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,7 +51,6 @@ Route::post('/contact', [ContactController::class, 'send'])->name('contact.send'
 // Normal Users Route List
 Route::middleware(['auth', 'user-access:member'])->group(function () {
     Route::resource('/registration-member', RegistrationMemberController::class);    
-    Route::resource('/registration-member', RegistrationMemberController::class);
 });
 
 // Normal Admin Route List
