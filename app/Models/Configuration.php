@@ -20,5 +20,10 @@ class Configuration extends Model
         'address',
         'phone',
         'map_link',
+        'motivation_1',
+        'motivation_2' ,
+        'paragraph_program',
+        'paragraph_trainer',
+        'paragraph_supplement',
     ];
 }
