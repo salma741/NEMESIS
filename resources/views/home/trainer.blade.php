@@ -5,7 +5,9 @@
                     <div class="section-heading">
                         <h2>Expert <em>Trainers</em></h2>
                         <img src="assets/images/line-dec.png" alt="">
-                        <p>Nunc urna sem, laoreet ut metus id, aliquet consequat magna. Sed viverra ipsum dolor, ultricies fermentum massa consequat eu.</p>
+                        @foreach ($configurations as $index => $configuration )
+                        <p>{{ $configuration->paragraph_trainer }}</p>
+                        @endforeach
                     </div>
                 </div>
             </div>

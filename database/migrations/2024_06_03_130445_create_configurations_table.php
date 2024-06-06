@@ -17,6 +17,11 @@ return new class extends Migration
             $table->string('address');
             $table->string('phone');
             $table->string('map_link');
+            $table->string('motivation_1');
+            $table->string('motivation_2');
+            $table->string('paragraph_program');
+            $table->string('paragraph_trainer');
+            $table->string('paragraph_supplement');
             $table->timestamps();
             $table->softDeletes();
         });

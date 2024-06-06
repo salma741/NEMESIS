@@ -5,8 +5,10 @@
                     <div class="section-heading">
                         <h2>Supporting <em>Supplements</em></h2>
                         <img src="assets/images/line-dec.png" alt="">
-                        <p>You can take advantage of supporting supplements for your body. </p>
-                    </div>
+                        @foreach ($configurations as $index => $configuration )
+                        <p>{{ $configuration->paragraph_supplement }} </p>
+                        @endforeach
+                      </div>
                 </div>
             </div>
             <div class="row" id="tabs">

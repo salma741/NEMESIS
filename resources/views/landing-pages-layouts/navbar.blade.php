@@ -4,7 +4,9 @@
                 <div class="col-12">
                     <nav class="main-nav">
                         <!-- ***** Logo Start ***** -->
-                        <a href="index.html" class="logo">FitSoul<em> Gym</em></a>
+                        @foreach ($configurations as $index => $configuration )
+                        <a href="index.html" class="logo">{{ $configuration->name }}<em> Gym</em></a>
+                        @endforeach
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
