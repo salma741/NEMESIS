@@ -9,7 +9,9 @@
     <meta name="author" content="">
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
     <link href="{{ asset('assets/style/style.css') }}" rel="stylesheet">
-    <title>Fit Soul Gym</title>
+    @foreach ($configurations as $index => $configuration )
+    <title>{{ $configuration->name }}</title>
+    @endforeach
 <!--
 
 TemplateMo 548 Training Studio
