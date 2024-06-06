@@ -1,8 +1,8 @@
 @extends('layouts.main')
 @section('container')
 
-@if (isset($memberPackage))
-<form action="{{ URL::to('registration-admin/' . $memberPackage->id)}}" method="POST" autocomplete="off">
+@if (isset($registration))
+<form action="{{ URL::to('registration-admin/' . $registration->id)}}" method="POST" autocomplete="off">
 @method('put')
 @else
 <form action="{{ URL::to('registration-admin')}}" method="POST" autocomplete="off">
@@ -15,7 +15,7 @@
         <select class="form-control  @error('member_id')is-invalid @enderror" name="member_id" id="member_id">
             <option value="" selected>Silahkan pilih nama member</option>
             @foreach($users as $user)
-                <option value="{{ $user->id }}" >{{ $user->name }}</option>    
+                <option value="{{ $user->id }}" {{ (old('member_id') ?? $registration->member_id ?? '') == $user->id ? 'selected' : '' }}>{{ $user->name }}</option>    
             @endforeach
         </select>
 
@@ -31,7 +31,7 @@
             <select onChange="selectMemberPackage({{$memberPackages}})" class="form-control  @error('member_package_id')is-invalid @enderror" name="member_package_id" id="member_package_id">
                 <option value="" selected>Silahkan pilih paket</option>
                 @foreach($memberPackages as $memberPackage)
-                    <option value="{{ $memberPackage->id }}" >{{ $memberPackage->name }}</option>    
+                    <option value="{{ $memberPackage->id }}" {{ (old('member_package_id') ?? $registration->member_package_id ?? '') == $memberPackage->id ? 'selected' : '' }}>{{ $memberPackage->name }}</option>    
                 @endforeach
             </select>
 
@@ -43,7 +43,7 @@
         </div> 
         <div class="form-group">
             <label for="name">Price</label>
-            <input type="text" id="price" name="price" class="form-control  @error('price')is-invalid @enderror" value="{{ old('price') }}" readonly>
+            <input type="text" id="price" name="price" class="form-control  @error('price')is-invalid @enderror" value="{{ old('price') ?? $registration->price ?? '' }}" readonly>
 
             @error('price')
             <div class="invalid-feedback">
@@ -52,20 +52,15 @@
             @enderror                   
         </div>
 
-        <div id="trainer_div" class="form-group" style="display:none">
-            <label for="trainer_id">Member Trainner</label>
-            <select class="form-control  @error('trainer_id')is-invalid @enderror" name="trainer_id" id="member_package_id">
-                @foreach($trainers as $trainer)
-                    <option value="{{ $trainer->id }}" >{{ $trainer->name }}</option>    
-                @endforeach
-            </select>
-
-            @error('trainer_id')
-            <div class="invalid-feedback">
-                {{ $message }}
-            </div>
-            @enderror                   
-        </div> 
+        <div id="trainer_div" class="form-group" style="{{ (old('is_with_trainer') ?? $registration->is_with_trainer ?? '') == 1 ? '' : 'display:none' }}">
+    <label for="trainer_id">Member Trainer</label>
+    <select class="form-control @error('trainer_id')is-invalid @enderror" name="trainer_id" id="trainer_id">
+        @foreach($trainers as $trainer)
+            <option value="{{ $trainer->id }}" {{ (old('trainer_id') ?? $registration->trainer_id ?? '') == $trainer->id ? 'selected' : '' }}>{{ $trainer->name }}</option>    
+        @endforeach
+    </select>
+</div>
+ 
             <button type="submit" class="btn btn-primary">Save</button>
             <a href="{{ URL::to('registration-admin/') }}" class="btn btn-secondary">Back</a>
         </div>
