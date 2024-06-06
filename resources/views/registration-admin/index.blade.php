@@ -38,9 +38,8 @@
             <td>{{ $index + 1 }}</td>
             <td>{{ $registration->member_name }}</td>
             <td>{{ $registration->memberPackage->name }}</td>
-            <td>{{ $registration->start_date}}</td>
-            <td>{{AddDay($registration->start_date, $registration->memberPackage->duration_day)}}
-            </td>            
+            <td>{{ $registration->start_date_formatted }}</td>
+            <td>{{ Carbon\Carbon::parse($registration->start_date)->addDays($registration->memberPackage->duration_day)->format('d-m-Y H:i:s') }}</td>           
             <td>{{ isset($registration->trainer)? $registration->trainer->name : "-" }}</td>
             <td>{{ $registration->price }}</td>    
             <td>{{ isset($registration->user)? $registration->user->name : "Self Registration" }}</td>   
