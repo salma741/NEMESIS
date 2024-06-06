@@ -97,7 +97,7 @@
             @enderror                   
         </div>
 
-        <a href="{{ URL::to('registration-admin') }}" class="btn btn-secondary">BackT</a>
+        <a href="{{ URL::to('registration-admin') }}" class="btn btn-secondary">Back</a>
     </div>
 </div>
 
