@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Trainer;
 use App\Models\Registration;
-use App\Models\Configuration;
 use Illuminate\Http\Request;
 use App\Models\MemberPackage;
 use Illuminate\Support\Facades\Auth;
@@ -18,7 +17,7 @@ class RegistrationMemberController extends Controller
     public function index()
     {
         $registrations = Registration::with('memberPackage', 'trainer', 'user')->where('member_id', auth()->user()->id)->get();
-        $configurations = Configuration::all();
+
         $data = [
             'title' => 'Member Registration Data',
             'information' => 'Berikut adalah daqwta registrasi member anda.',
@@ -34,7 +33,7 @@ class RegistrationMemberController extends Controller
      */
     public function create()
     {
-        $configurations = Configuration::all();
+
         $data = [
             'title' => 'Add Member Registration Data',
             'information' => 'Silahkan registrasi paket anda',

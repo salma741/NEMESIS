@@ -5,7 +5,9 @@
                     <div class="section-heading">
                         <h2>Choose <em>Program</em></h2>
                         <img src="assets/images/line-dec.png" alt="waves">
-                        <h5 style="color: grey;">BUILD YOUR MUSCLE, with this program!</h5>
+                        @foreach ($configurations as $index => $configuration )
+                        <h5 style="color: grey;">{{ $configuration->paragraph_program }}</h5>
+                        @endforeach
                     </div>
                 </div>
                 <div class="col-lg-6">

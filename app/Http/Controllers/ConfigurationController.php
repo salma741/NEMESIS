@@ -26,7 +26,7 @@ class ConfigurationController extends Controller
     public function create()
     {
         $data = [
-            'title' => 'Add New Maps',
+            'title' => 'Add New Configuration',
         ];
 
         return view('configuration.form', $data);
@@ -42,6 +42,11 @@ class ConfigurationController extends Controller
             'address.required' => 'Silakan isi alamat.',
             'phone.required' => 'Silakan isi nomor ponsel.',
             'map_link.required' => 'Silakan isi link map.',
+            'motivation_1' => 'Silakan isi.',
+            'motivation_2' => 'Silakan isi.',
+            'paragraph_program' => 'Silakan isi.',
+            'paragraph_trainer' => 'Silakan isi.',
+            'paragraph_supplement' => 'Silakan isi.',
         ]; 
     
         $data = $request->validate([
@@ -49,6 +54,11 @@ class ConfigurationController extends Controller
             'address' => 'required',
             'phone' => 'required|numeric',
             'map_link' => 'required',
+            'motivation_1',
+            'motivation_2',
+            'paragraph_program',
+            'paragraph_trainer',
+            'paragraph_supplement',
         ], $messages);
     
         try {
@@ -83,6 +93,11 @@ class ConfigurationController extends Controller
             'address.required' => 'Silakan isi alamat.',
             'phone.required' => 'Silakan isi nomor ponsel.',
             'map_link.required' => 'Silakan isi link map.',
+            'motivation_1' => 'Silakan isi.',
+            'motivation_2' => 'Silakan isi.',
+            'paragraph_program' => 'Silakan isi.',
+            'paragraph_trainer' => 'Silakan isi.',
+            'paragraph_supplement' => 'Silakan isi.',
         ]; 
     
         $data = $request->validate([
@@ -90,6 +105,11 @@ class ConfigurationController extends Controller
             'address' => 'required',
             'phone' => 'required|numeric',
             'map_link' => 'required',
+            'motivation_1',
+            'motivation_2' ,
+            'paragraph_program',
+            'paragraph_trainer',
+            'paragraph_supplement',
         ], $messages);
     
         try {

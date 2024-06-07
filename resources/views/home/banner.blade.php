@@ -5,8 +5,10 @@
 
         <div class="video-overlay header-text">
             <div class="caption">
-                <h6>work harder, get stronger</h6>
-                <h2>easy with <em>FITSOUL</em></h2>
+            @foreach ($configurations as $index => $configuration )
+                <h6>{{ $configuration->motivation_1 }}</h6>
+                <h2>{{ $configuration->motivation_2 }} <em>{{ $configuration->name }}</em></h2>
+                @endforeach
                 <div class="main-button scroll-to-section">
                     <a href="{{URL::to('registration-member')}}">Join Member</a>
                 </div>
