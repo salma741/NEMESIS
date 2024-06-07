@@ -66,6 +66,11 @@ Route::middleware(['auth', 'user-access:super admin'])->group(function () {
     Route::resource('carousel', CarouselController::class);
     Route::resource('configuration', ConfigurationController::class);
     Route::resource('contact-us', ContactController::class);
+    Route::resource('registration', RegistrationController::class);
+
+    Route::post('/check-in', [RegistrationController::class, "checkIn"]);
+    Route::post('/check-in-trainer', [RegistrationController::class, "trainerCheckIn"]);
+    
 });
 
 Route::middleware(['auth', 'admin-access:admin'])->group(function () {

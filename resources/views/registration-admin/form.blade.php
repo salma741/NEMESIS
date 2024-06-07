@@ -43,14 +43,15 @@
         </div> 
         <div class="form-group">
             <label for="name">Price</label>
-            <input type="text" id="price" name="price" class="form-control  @error('price')is-invalid @enderror" value="{{ old('price') ?? $registration->price ?? '' }}" readonly>
+            <input type="text" id="price" name="price" class="form-control @error('price') is-invalid @enderror" value="{{ old('price') ?? ($registration->price ?? '') }}" readonly>
 
             @error('price')
             <div class="invalid-feedback">
                 {{ $message }}
             </div>
-            @enderror                   
-        </div>
+            @enderror
+    </div>
+
 
         <div id="trainer_div" class="form-group" style="{{ (old('is_with_trainer') ?? $registration->is_with_trainer ?? '') == 1 ? '' : 'display:none' }}">
     <label for="trainer_id">Member Trainer</label>
