@@ -46,7 +46,7 @@
 
         <div class="form-group">
             <label for="price">Price</label>
-            <input type="text" id="price" name="price" class="form-control @error('price')is-invalid @enderror" value="{{ $registration->price }}" readonly>
+            <input type="text" id="price" name="price" class="form-control @error('price')is-invalid @enderror" value="{{NumberFormat($registration->price)}}" readonly>
             @error('price')
             <div class="invalid-feedback">
                 {{ $message }}
@@ -56,7 +56,7 @@
 
         <div class="form-group">
             <label for="start_date">Start Date</label>
-            <input type="text" id="start_date" name="start_date" class="form-control @error('start_date')is-invalid @enderror" value="{{ $registration->start_date_formatted }}" readonly>
+            <input type="text" id="start_date" name="start_date" class="form-control @error('start_date')is-invalid @enderror" value="{{ DateFormat($registration->start_date)}}" readonly>
             @error('start_date')
             <div class="invalid-feedback">
                 {{ $message }}
@@ -66,7 +66,7 @@
 
         <div class="form-group">
             <label for="end_date">End Date</label>
-            <input type="text" id="end_date" name="end_date" class="form-control @error('end_date')is-invalid @enderror" value="{{ $registration->end_date_formatted }}" readonly>
+            <input type="text" id="end_date" name="end_date" class="form-control @error('end_date')is-invalid @enderror" value="{{DateFormat($registration->end_date) }}" readonly>
             @error('end_date')
             <div class="invalid-feedback">
                 {{ $message }}

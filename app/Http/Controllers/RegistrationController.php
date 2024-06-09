@@ -1,12 +1,15 @@
 <?php
-
 namespace App\Http\Controllers;
+
+use App\Models\CheckStatus;
+use App\Models\CheckTrainerStatus;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Trainer;
 use App\Models\Registration;
 use Illuminate\Http\Request;
 use App\Models\MemberPackage;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class RegistrationController extends Controller
@@ -16,17 +19,29 @@ class RegistrationController extends Controller
      */
     public function index()
 {
-    $registrations = Registration::with('memberPackage', 'trainer', 'user')->get();
-
-    $registrations->each(function ($registration) {
-        $user = User::find($registration->member_id);
-        $registration->member_name = $user ? $user->name : "Nama Pengguna Tidak Tersedia";
-
-        // Format start_date dan end_date ke format Indonesia
-        $registration->start_date_formatted = Carbon::parse($registration->start_date)->format('d-m-Y H:i:s');
-        $registration->end_date_formatted = Carbon::parse($registration->start_date)->addDays($registration->memberPackage->duration_day)->format('d-m-Y H:i:s');
-    });
-
+    $registrations = DB::table('registrations')
+    ->leftJoin('users as admin', 'admin.id', '=', 'registrations.user_id')
+    ->join('users as member', 'member.id', '=', 'registrations.member_id')
+    ->join('member_packages', 'member_packages.id', '=', 'registrations.member_package_id')
+    ->leftJoin('trainers', 'trainers.id', '=', 'registrations.trainer_id')
+    ->leftJoin(DB::raw('(SELECT count(id) as total_check_in_trainer, registration_id FROM `check_trainer_statuses` GROUP BY registration_id) as check_status_count'), 'check_status_count.registration_id', '=', 'registrations.id')
+    ->select([
+        'registrations.start_date',
+        DB::raw('DATE_ADD(registrations.start_date, INTERVAL member_packages.duration_day DAY) as end_date'),
+        DB::raw('DATEDIFF(NOW(), DATE_ADD(registrations.start_date, INTERVAL member_packages.duration_day DAY)) as can_check_in'),
+        
+        'member.name as member_name',
+        'admin.name as admin_name',
+        'member_packages.duration_day',
+        'member_packages.duration_trainer',
+        'check_status_count.total_check_in_trainer',
+        'member_packages.name as member_package_name', 
+        'trainers.name as trainer_name',
+        'registrations.price',
+        'registrations.id'
+    ])
+    ->get();
+        // dd($registrations);
     $data = [
         'title' => 'Member Registrations Data',
         'registrations' => $registrations,
@@ -45,7 +60,7 @@ class RegistrationController extends Controller
             'title' => 'Add Member Registration Data',
             'memberPackages' => MemberPackage::get(),
             'trainers' => Trainer::get(),
-            'users' => User::get(),
+            'users' => User::where('role', 'member')->get(),
         ];
 
         return view('registration-admin.form', $data);
@@ -91,8 +106,8 @@ class RegistrationController extends Controller
     if (!$registration) {
         return redirect('registration-admin')->with("errorMessage", 'Registrasi tidak ditemukan');
     }
-    $registration->start_date_formatted = Carbon::parse($registration->start_date)->format('d-m-Y H:i:s');
-    $registration->end_date_formatted = Carbon::parse($registration->start_date)->addDays($registration->memberPackage->duration_day)->format('d-m-Y H:i:s');
+    // $registration->start_date_formatted = Carbon::parse($registration->start_date)->format('d-m-Y H:i:s');
+    // $registration->end_date_formatted = Carbon::parse($registration->start_date)->addDays($registration->memberPackage->duration_day)->format('d-m-Y H:i:s');
 
     $data = [
         'title' => 'Registration Detail',
@@ -167,7 +182,63 @@ class RegistrationController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
-    {
-        //
+{
+    try {
+        $registration = DB::table('registrations')
+            ->where('registrations.id', $id)
+            ->leftJoin('users as admin', 'admin.id', '=', 'registrations.user_id')
+            ->join('users as member', 'member.id', '=', 'registrations.member_id')
+            ->join('member_packages', 'member_packages.id', '=', 'registrations.member_package_id')
+            ->leftJoin('trainers', 'trainers.id', '=', 'registrations.trainer_id')
+            ->leftJoin(DB::raw('(SELECT count(id) as total_check_in_trainer, registration_id FROM `check_trainer_statuses` GROUP BY registration_id) as check_status_count'), 'check_status_count.registration_id', '=', 'registrations.id')
+            ->select([
+                'registrations.start_date',
+                DB::raw('DATE_ADD(registrations.start_date, INTERVAL member_packages.duration_day DAY) as end_date'),
+                DB::raw('DATEDIFF(NOW(), DATE_ADD(registrations.start_date, INTERVAL member_packages.duration_day DAY)) as can_check_in'),
+                
+                'member.name as member_name',
+                'admin.name as admin_name',
+                'member_packages.duration_day',
+                'member_packages.duration_trainer',
+                'check_status_count.total_check_in_trainer',
+                'member_packages.name as member_package_name', 
+                'trainers.name as trainer_name',
+                'registrations.price',
+                'registrations.id'
+            ])
+            ->first();
+        
+        if (!$registration) {
+            return redirect('registration-admin')->with("errorMessage", "Registrasi tidak ditemukan!");
+        }
+        DB::table('registrations')->where('id', $id)->delete();
+
+        return redirect('registration-admin')->with("successMessage", "Data berhasil dihapus!");
+    } catch (\Throwable $e) {
+        return redirect('registration-admin')->with("errorMessage", "Terjadi kesalahan saat menghapus data!");
     }
 }
+    public function checkIn(Request $request)
+    {
+        $data = $request->validate([
+            'registration_id' => 'required'
+        ]);
+
+        CheckStatus::create($data);
+
+        return redirect()->route('registration-admin.index')->with('success', 'Check in berhasil dibuat.');
+    }
+
+    public function trainerCheckIn(Request $request)
+    {
+        $data = $request->validate([
+            'registration_id' => 'required'
+        ]);
+
+        CheckTrainerStatus::create($data);
+
+        return redirect()->route('registration-admin.index')->with('success', 'Check in trainer berhasil dibuat.');
+    }    
+}
+
+?>

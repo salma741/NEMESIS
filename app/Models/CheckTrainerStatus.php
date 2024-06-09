@@ -6,14 +6,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class CheckStatus extends Model
+class CheckTrainerStatus extends Model
 {
     use HasFactory, SoftDeletes;
+    protected $dates = ['deleted_at'];
     protected $fillable = [
         'registration_id',
-    ];    
-    protected $dates = ['deleted_at'];
+    ];
+
     public function registration(){
         return $this->belongsTo(Registration::class);
     }
 }
+
+

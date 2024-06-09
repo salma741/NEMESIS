@@ -26,7 +26,7 @@
             <td>{{AddDay($registration->start_date, $registration->memberPackage->duration_day)}}
             </td>            
             <td>{{ isset($registration->trainer)? $registration->trainer->name : "-" }}</td>
-            <td>{{ $registration->price }}</td>    
+            <td>{{ NumberFormat($registration->price) }}</td>    
             <td>{{ isset($registration->user)? $registration->user->name : "Self Registration" }}</td>                               
         </tr>
         @endforeach
