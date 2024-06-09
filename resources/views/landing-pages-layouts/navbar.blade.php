@@ -16,7 +16,7 @@
                             <li class="scroll-to-section"><a href="#schedule">Membership</a></li>
                             <li class="scroll-to-section"><a href="#contact-us">Contact</a></li>
                             @if($hasRegistrations)
-                            <li class="scroll-to-section"><a href="{{ URL::to('/registration-member') }}">My Registrations</a></li>
+                            <li class="scroll-to-section"><a href="{{ URL::to('/registration-member') }}">My Registrationss</a></li>
                             @endif
                             @if(auth()->check())
                             <li class="main-button"><a href="{{ route('logout') }}">Logout</a></li>
