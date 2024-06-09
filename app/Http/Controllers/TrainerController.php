@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Trainer;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Storage;
 
 class TrainerController extends Controller
 {
@@ -54,10 +55,9 @@ class TrainerController extends Controller
 
     
         try {
-            if($request->hasFile('image')) {
-                $data['image'] = $request->file("image")->store('img');
-            } else {
-                $data['image'] = null;
+            if ($request->hasFile('image')) {
+                $imagePath = $request->file('image')->store('img');
+                $data['image'] = $imagePath;
             }
 
             Trainer::create($data);
@@ -103,11 +103,9 @@ class TrainerController extends Controller
     
         try {
             if($request->hasFile('image')) {
-                $data['image'] = $request->file("image")->store('img');
-            } else {
-                $data['image'] = null;
-            }
-            
+                $data['image'] = $request->file("image")->store('img', 'public');
+            } 
+
             $trainer = Trainer::findOrFail($id);
             $trainer->update($data);
             Alert::success('Sukses', 'Data berhasil diperbarui.');
