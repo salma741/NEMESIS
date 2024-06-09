@@ -434,3 +434,9 @@ h4 {
     height: 300px;
     object-fit: cover;
 }
+
+.custom-image-size {
+    width: 350px; /* Atur lebar gambar sesuai kebutuhan Anda */
+    height: 350px; /* Atur tinggi gambar sesuai kebutuhan Anda */
+    object-fit: cover; /* Menjaga proporsi gambar */
+}

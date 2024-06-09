@@ -54,11 +54,11 @@ class ConfigurationController extends Controller
             'address' => 'required',
             'phone' => 'required|numeric',
             'map_link' => 'required',
-            'motivation_1',
-            'motivation_2',
-            'paragraph_program',
-            'paragraph_trainer',
-            'paragraph_supplement',
+            'motivation_1' => 'sometimes',
+            'motivation_2'  => 'sometimes',
+            'paragraph_program' => 'sometimes',
+            'paragraph_trainer' => 'sometimes',
+            'paragraph_supplement' => 'sometimes',
         ], $messages);
     
         try {
@@ -105,11 +105,11 @@ class ConfigurationController extends Controller
             'address' => 'required',
             'phone' => 'required|numeric',
             'map_link' => 'required',
-            'motivation_1',
-            'motivation_2' ,
-            'paragraph_program',
-            'paragraph_trainer',
-            'paragraph_supplement',
+            'motivation_1' => 'sometimes',
+            'motivation_2'  => 'sometimes',
+            'paragraph_program' => 'sometimes',
+            'paragraph_trainer' => 'sometimes',
+            'paragraph_supplement' => 'sometimes',
         ], $messages);
     
         try {
