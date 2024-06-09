@@ -38,16 +38,16 @@
             <td>{{ $user->role }}</td>
             <td>
                 <div class="d-flex">
-                <a href="{{ URL::to('user/' . $user->id) }}" class="btn btn-sm btn-info mr-2">
-                Show</a>
-                <a href="{{ URL::to('user/' . $user->id. '/edit') }}" class="btn btn-sm btn-warning mr-2">
-                Edit</a>
-                <form action="{{ URL::to('user/' . $user->id) }}" method="post">
-                    @csrf
-                    @method('delete')
-                    <button type="submit" class="btn btn-sm btn-danger"
-                    onclick="return confirm('Anda yakin ingin menghapus data ini {{ $user->name }}?')">Delete</button>
-                </form>
+                    <a href="{{ URL::to('user/' . $user->id) }}" class="btn btn-sm btn-info mr-2">
+                    Show</a>
+                    <a href="{{ URL::to('user/' . $user->id. '/edit') }}" class="btn btn-sm btn-warning mr-2">
+                    Edit</a>
+                    <form action="{{ URL::to('user/' . $user->id) }}" method="post">
+                        @csrf
+                        @method('delete')
+                        <button type="submit" class="btn btn-sm btn-danger"
+                        onclick="return confirm('Anda yakin ingin menghapus data ini {{ $user->name }}?')">Delete</button>
+                    </form>
                 </div>
             </td>
         </tr>

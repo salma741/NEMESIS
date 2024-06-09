@@ -13,7 +13,23 @@
         {{ session("errorMessage") }}
     </div>
 @endif 
-
+<div class="row">
+        <div class="col-2">
+            <div class="form-group">
+                <label for="start_date">Start Date</label>
+                <input type="date" id="start_date" name="start_date" class="form-control" value="">               
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="form-group">
+                <label for="end_date">End Date</label>
+                <input type="date" id="end_date" name="end_date" class="form-control" value="">               
+            </div>
+        </div>    
+        <div class="col-2 mt-4">
+            <button type="submit" class="btn btn-primary">Filter</button>
+        </div>            
+    </div>
 <a href="{{ URL::to('registration-admin/create') }}" class="btn btn-primary mb-3">
     <i class="fas fa-plus" aria-hidden="true"></i> Add
 </a>

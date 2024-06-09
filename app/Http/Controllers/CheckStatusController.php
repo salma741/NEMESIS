@@ -1,19 +1,10 @@
 <?php
 
-namespace App\Models;
+namespace App\Http\Controllers;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Http\Request;
 
-class CheckStatus extends Model
+class CheckStatusController extends Controller
 {
-    use HasFactory, SoftDeletes;
-    protected $fillable = [
-        'registration_id',
-    ];    
-    protected $dates = ['deleted_at'];
-    public function registration(){
-        return $this->belongsTo(Registration::class);
-    }
+    //
 }
