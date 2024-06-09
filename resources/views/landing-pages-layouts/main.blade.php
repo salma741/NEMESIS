@@ -55,7 +55,7 @@ https://templatemo.com/tm-548-training-studio
                     <div class="section-heading">
                         <h2>{{$title}}</h2>
                         <img src="{{ asset('assets/images/line-dec.png')}}" alt="waves">
-                        <p>{{$information}}</p>
+                        <!-- -->
                     </div>
                 </div>
                 <div class="col-lg-12">

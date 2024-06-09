@@ -52,7 +52,7 @@ class SupplementController extends Controller
         try {
             $data['user_id'] = auth()->user()->id;
             if($request->hasFile('image')) {
-                $data['image'] = $request->file("image")->store('img');
+                $data['image'] = $request->file("image")->store('img', 'public');
             } else {
                 $data['image'] = null;
             }
@@ -98,7 +98,7 @@ class SupplementController extends Controller
         try {
             $data['user_id'] = auth()->user()->id;
             if($request->hasFile('image')) {
-                $data['image'] = $request->file("image")->store('img');
+                $data['image'] = $request->file("image")->store('img', 'public');
             } else {
                 $data['image'] = null;
             }

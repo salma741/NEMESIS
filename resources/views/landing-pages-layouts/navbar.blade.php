@@ -19,6 +19,16 @@
                             <li class="scroll-to-section"><a href="{{ URL::to('/registration-member') }}">My Registrationss</a></li>
                             @endif
                             @if(auth()->check())
+                            <li class="nav-item dropdown scroll-to-section">
+                                <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Profile
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('member-profile') }}">Edit Profile</a>
+                                    <a class="dropdown-item" href="#">Your Member Package Registration</a>
+                                    <a class="dropdown-item" href="#">Your Status</a>
+                                </div>
+                            </li>
                             <li class="main-button"><a href="{{ route('logout') }}">Logout</a></li>
                             @else
                             <li class="main-button"><a href="{{ route('login') }}">Login</a></li>
@@ -33,3 +43,23 @@
             </div>
         </div>
     </header>
+    <script>
+        $(document).ready(function () {
+            $('.dropdown-toggle').click(function (e) {
+                var $el = $(this).next('.dropdown-menu');
+                var isVisible = $el.is(':visible');
+                $('.dropdown-menu').not($el).hide(); // Hide other dropdowns
+                if (isVisible) {
+                    $el.hide(); // If clicked again, hide it
+                } else {
+                    $el.show(); // Show the clicked dropdown
+                }
+                return false; // Prevent default action and stop propagation
+            });
+            $(document).click(function (e) {
+                if (!$(e.target).closest('.dropdown').length) {
+                    $('.dropdown-menu').hide(); // Hide dropdown if clicked outside
+                }
+            });
+        });
+    </script>
