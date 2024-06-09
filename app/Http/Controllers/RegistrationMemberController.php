@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Trainer;
 use App\Models\Registration;
 use Illuminate\Http\Request;
+use App\Models\Configuration;
 use App\Models\MemberPackage;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -16,13 +17,19 @@ class RegistrationMemberController extends Controller
      */
     public function index()
     {
-        $registrations = Registration::with('memberPackage', 'trainer', 'user')->where('member_id', auth()->user()->id)->get();
+        $user = auth()->user();
+        $registrations = Registration::with('memberPackage', 'trainer', 'user')
+            ->where('member_id', $user->id)
+            ->get();
+        $configurations = Configuration::all();
+        $hasRegistrations = $registrations->isNotEmpty();
 
         $data = [
             'title' => 'Member Registration Data',
-            'information' => 'Berikut adalah daqwta registrasi member anda.',
+            'information' => 'Berikut adalah data registrasi member anda.',
             'registrations' => $registrations,
-            'configurations' => app('configurations'),
+            'configurations' => $configurations,
+            'hasRegistrations' => $hasRegistrations,
         ];
 
         return view('registration-member.index', $data);
@@ -106,4 +113,6 @@ class RegistrationMemberController extends Controller
     {
         //
     }
+
+    
 }
