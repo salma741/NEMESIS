@@ -18,6 +18,6 @@ class UserAccess
         if (auth()->user()->type == $userType) {
             return $next($request);
         }
-        return redirect()->route('auth.index');
+        return redirect()->route('home');
     }
 }

@@ -2,7 +2,8 @@
 @section('container')
 @include('sweetalert::alert')
 <div class="main-button mb-3">
-    <a href="{{ URL::to('registration-member/create') }}">Add</a>
+    <a href="{{ route('member-profile') }}" class="btn btn-secondary">Back</a>
+    <a href="{{ URL::to('registration-member/create') }}" class="btn btn-secondary">Add</a>
 </div>
 
 <table class="table" width="100%">
@@ -22,7 +23,7 @@
          <tr>
             <td>{{ $index + 1 }}</td>
             <td>{{ $registration->memberPackage->name }}</td>
-            <td>{{ $registration->start_date}}</td>
+            <td>{{DateFormat ($registration->start_date)}}</td>
             <td>{{AddDay($registration->start_date, $registration->memberPackage->duration_day)}}
             </td>            
             <td>{{ isset($registration->trainer)? $registration->trainer->name : "-" }}</td>
