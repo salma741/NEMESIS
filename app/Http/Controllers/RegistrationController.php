@@ -19,6 +19,7 @@ class RegistrationController extends Controller
      */
     public function index()
 {
+    //$activeStatus = Request::input('active_statu');
     $registrations = DB::table('registrations')
     ->leftJoin('users as admin', 'admin.id', '=', 'registrations.user_id')
     ->join('users as member', 'member.id', '=', 'registrations.member_id')
@@ -40,6 +41,12 @@ class RegistrationController extends Controller
         'registrations.price',
         'registrations.id'
     ])
+    // ini jika masih aktif
+    //if(activeStatus == "all"){}
+    //if(activeStatus == "active"){
+    // ->havingRaw('DATEDIFF(NOW(), DATE_ADD(registrations.start_date, INTERVAL member_packages.duration_day DAY)) < 0')
+    // }
+    //inactive => >=
     ->get();
         // dd($registrations);
     $data = [
@@ -241,4 +248,3 @@ class RegistrationController extends Controller
     }    
 }
 
-?>
