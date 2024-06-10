@@ -17,45 +17,63 @@ class RegistrationController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
 {
-    //$activeStatus = Request::input('active_statu');
-    $registrations = DB::table('registrations')
-    ->leftJoin('users as admin', 'admin.id', '=', 'registrations.user_id')
-    ->join('users as member', 'member.id', '=', 'registrations.member_id')
-    ->join('member_packages', 'member_packages.id', '=', 'registrations.member_package_id')
-    ->leftJoin('trainers', 'trainers.id', '=', 'registrations.trainer_id')
-    ->leftJoin(DB::raw('(SELECT count(id) as total_check_in_trainer, registration_id FROM `check_trainer_statuses` GROUP BY registration_id) as check_status_count'), 'check_status_count.registration_id', '=', 'registrations.id')
-    ->select([
-        'registrations.start_date',
-        DB::raw('DATE_ADD(registrations.start_date, INTERVAL member_packages.duration_day DAY) as end_date'),
-        DB::raw('DATEDIFF(NOW(), DATE_ADD(registrations.start_date, INTERVAL member_packages.duration_day DAY)) as can_check_in'),
-        
-        'member.name as member_name',
-        'admin.name as admin_name',
-        'member_packages.duration_day',
-        'member_packages.duration_trainer',
-        'check_status_count.total_check_in_trainer',
-        'member_packages.name as member_package_name', 
-        'trainers.name as trainer_name',
-        'registrations.price',
-        'registrations.id'
-    ])
-    // ini jika masih aktif
-    //if(activeStatus == "all"){}
-    //if(activeStatus == "active"){
-    // ->havingRaw('DATEDIFF(NOW(), DATE_ADD(registrations.start_date, INTERVAL member_packages.duration_day DAY)) < 0')
+    $startDate = $request->input('start_date');
+    $endDate = $request->input('end_date');
+    $activeStatus = $request->input('active_status');
+    $now = \Carbon\Carbon::now();
+
+    $startDate = $startDate ? $startDate : $now->format('Y-m-d');
+    $endDate = $endDate ? $endDate : $now->format('Y-m-d');
+
+    $query = DB::table('registrations')
+        ->leftJoin('users as admin', 'admin.id', '=', 'registrations.user_id')
+        ->join('users as member', 'member.id', '=', 'registrations.member_id')
+        ->join('member_packages', 'member_packages.id', '=', 'registrations.member_package_id')
+        ->leftJoin('trainers', 'trainers.id', '=', 'registrations.trainer_id')
+        ->leftJoin(DB::raw('(SELECT count(id) as total_check_in_trainer, registration_id FROM `check_trainer_statuses` GROUP BY registration_id) as check_status_count'), 'check_status_count.registration_id', '=', 'registrations.id')
+        ->select([
+            'registrations.start_date',
+            DB::raw('DATE_ADD(registrations.start_date, INTERVAL member_packages.duration_day DAY) as end_date'),
+            DB::raw('DATEDIFF(NOW(), DATE_ADD(registrations.start_date, INTERVAL member_packages.duration_day DAY)) as can_check_in'),
+            'member.name as member_name',
+            'admin.name as admin_name',
+            'member_packages.duration_day',
+            'member_packages.duration_trainer',
+            'check_status_count.total_check_in_trainer',
+            'member_packages.name as member_package_name', 
+            'trainers.name as trainer_name',
+            'registrations.price',
+            'registrations.id'
+        ])->whereBetween('start_date', [$startDate . " 00:00:00", $endDate . " 23:59:59"])->orderby('start_date', 'desc');
+    // if ($request->has('startDate') && $request->has('endDate')) {
+    //     $query->whereBetween('registrations.start_date', [$startDate . ' 00:00:00', $endDate . ' 23:59:59']);
     // }
-    //inactive => >=
-    ->get();
-        // dd($registrations);
+    if ($request->has('active_status')) {
+        if ($activeStatus == 'active') {
+            $query->whereRaw('DATEDIFF(NOW(), DATE_ADD(registrations.start_date, INTERVAL member_packages.duration_day DAY)) < 0');
+        } elseif ($activeStatus == 'inactive') {
+            $query->whereRaw('DATEDIFF(NOW(), DATE_ADD(registrations.start_date, INTERVAL member_packages.duration_day DAY)) >= 0');
+        }
+    } elseif ($activeStatus == 'all') {
+        // Tidak ada filter status yang diterapkan
+    }
+
+    $registrations = $query->get();
+
     $data = [
         'title' => 'Member Registrations Data',
         'registrations' => $registrations,
+        'startDate' => $startDate,
+        'endDate' => $endDate,
+        'activeStatus' => $activeStatus,
     ];
 
     return view('registration-admin.index', $data);
 }
+
+
 
 
     /**
@@ -248,3 +266,4 @@ class RegistrationController extends Controller
     }    
 }
 
+?>

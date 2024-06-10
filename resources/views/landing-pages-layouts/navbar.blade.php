@@ -5,7 +5,7 @@
                     <nav class="main-nav">
                         <!-- ***** Logo Start ***** -->
                         @foreach ($configurations as $index => $configuration )
-                        <a href="index.html" class="logo me-3">{{ $configuration->name }}<em> Gym</em></a>
+                        <a href="index.html" class="logo">{{ $configuration->name }}<em> Gym</em></a>
                         @endforeach
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
@@ -16,21 +16,10 @@
                             <li class="scroll-to-section"><a href="#schedule">Membership</a></li>
                             <li class="scroll-to-section"><a href="#contact-us">Contact</a></li>
                             @if($hasRegistrations)
-                            <li class="scroll-to-section"><a href="{{ URL::to('/registration-member') }}">My Registrations</a></li>
+                            <li class="scroll-to-section"><a href="{{URL::to('registration-member')}}">My Registrations</a></li>
                             @endif
                             @if(auth()->check())
-                            <li class="nav-item dropdown scroll-to-section">
-                                <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Profile
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('member-profile') }}">Edit Profile</a>
-                                    @if($hasRegistrations)
-                                    <a class="dropdown-item" href="{{ URL::to('/registration-member') }}">My Registrations</a>
-                                    @endif
-                                    <a class="dropdown-item" href="#">Your Status</a>
-                                </div>
-                            </li>
+                            <li class="scroll-to-section"><a href="{{ route('member-profile') }}">Your Profile</a></li>
                             <li class="main-button"><a href="{{ route('logout') }}">Logout</a></li>
                             @else
                             <li class="main-button"><a href="{{ route('login') }}">Login</a></li>

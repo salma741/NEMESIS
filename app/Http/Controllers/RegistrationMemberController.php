@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Trainer;
 use App\Models\Registration;
 use Illuminate\Http\Request;
@@ -15,11 +16,18 @@ class RegistrationMemberController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $startDate = $request->input("startDate");
+        $endDate = $request->input("endDate");
+
+        $now = Carbon::now();
+        $startDate = $startDate? $startDate : $now;
+        $endDate = $endDate? $endDate : $now;
+
         $user = auth()->user();
         $registrations = Registration::with('memberPackage', 'trainer', 'user')
-            ->where('member_id', $user->id)
+            ->where('member_id', $user->id)->whereBetween('start_date', [$startDate . " 00:00:00", $endDate . " 23:59:59"])->orderby('start_date', 'desc')
             ->get();
         $configurations = Configuration::all();
         $hasRegistrations = $registrations->isNotEmpty();
@@ -30,6 +38,8 @@ class RegistrationMemberController extends Controller
             'registrations' => $registrations,
             'configurations' => $configurations,
             'hasRegistrations' => $hasRegistrations,
+            "startDate" => $startDate,
+            "endDate" => $endDate,
         ];
 
         return view('registration-member.index', $data);
