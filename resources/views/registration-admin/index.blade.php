@@ -59,37 +59,40 @@
             <td class="align-middle">{{ NumberFormat($registration->price) }}</td>    
             <td class="align-middle">{{ $registration->admin_name? $registration->admin_name : "Self Registration" }}</td>   
             <td class="align-middle">
-                <div class="d-flex">
-                    <a href="{{ URL::to('registration-admin/' . $registration->id) }}" class="btn btn-sm btn-info mr-2">Show</a>
-                    <a href="{{ URL::to('registration-admin/' . $registration->id . '/edit') }}" class="btn btn-sm mr-2 btn-warning mr-2">Edit</a>
+                <div class="d-flex flex-wrap">
+                    <a href="{{ URL::to('registration-admin/' . $registration->id) }}" class="btn btn-sm btn-info btn-width mr-2 mb-2">Show</a>
+                    <a href="{{ URL::to('registration-admin/' . $registration->id . '/edit') }}" class="btn btn-sm btn-warning btn-width mr-2 mb-2">Edit</a>
                     <form action="{{ URL::to('registration-admin/' . $registration->id) }}" method="post">
                         @csrf
                         @method('delete')
-                        <button type="submit" class="btn btn-sm btn-danger mr-2"
+                        <button type="submit" class="btn btn-sm btn-danger btn-width mr-2 mb-2"
                         onclick="return confirm('Anda yakin ingin menghapus data ini?')">Delete</button>
                     </form>
                     @if($registration->can_check_in < 0 )
                     <form action="{{ URL::to('check-in') }}" method="post">
-                            @csrf
-                            <input type="hidden" name="registration_id" value="{{$registration->id}}">
-                            <button type="submit" class="btn btn-sm btn-success mr-2">Check In
-                            </button>
-                        </form>
-                        @if($lastTrainingSessionCount>0)
-                        <form action="{{ URL::to('check-in-trainer') }}" method="post">
-                            @csrf
-                            <input type="hidden" name="registration_id" value="{{$registration->id}}">                            
-                            <button type="submit" class="btn btn-sm btn-outline-success">Check In Trainer
-                            </button>
-                        </form>          
-                        @endif              
-                    </div>
-                    @endif    
-            </td>                            
+                        @csrf
+                        <input type="hidden" name="registration_id" value="{{$registration->id}}">
+                        <button type="submit" class="btn btn-sm btn-success btn-width mr-2 mb-2">Check In</button>
+                    </form>
+                    @if($lastTrainingSessionCount > 0)
+                    <form action="{{ URL::to('check-in-trainer') }}" method="post">
+                        @csrf
+                        <input type="hidden" name="registration_id" value="{{$registration->id}}">
+                        <button type="submit" class="btn btn-sm btn-outline-success btn-width mr-2 mb-2">Check In Trainer</button>
+                    </form>
+                    @endif
+                    @endif
+                </div>
+            </td>                 
         </tr>
         @endforeach
-       
     </tbody>
 </table>
+<style>
+.btn-width {
+    min-width: 100px;
+    text-align: center;
+}
+</style>
 @endsection
 

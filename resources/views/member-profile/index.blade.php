@@ -1,7 +1,12 @@
 @extends('landing-pages-layouts.main')
 @section('container')
-
-<div class="row">
+<div class="main-button mb-3">
+@if($hasRegistrations)
+<a href="{{ URL::to('/registration-member') }}" class="btn btn-secondary">Your Registration</a>
+<a href="{{ URL::to('/registration-member') }}" class="btn btn-secondary">Your Status</a>
+@endif
+</div>
+<div class="row mt-10">
     <div class="col-5">
         <div class="form-group">
             <label for="image">Photo</label>

@@ -15,18 +15,19 @@
                             <li class="scroll-to-section"><a href="#our-classes">Supplement</a></li>
                             <li class="scroll-to-section"><a href="#schedule">Membership</a></li>
                             <li class="scroll-to-section"><a href="#contact-us">Contact</a></li>
-                        
+                            @if($hasRegistrations)
+                            <li class="scroll-to-section"><a href="{{ URL::to('/registration-member') }}">My Registrations</a></li>
+                            @endif
                             @if(auth()->check())
-                            <li class="scroll-to-section nav-item dropdown">
+                            <li class="nav-item dropdown scroll-to-section">
                                 <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Profile
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('member-profile') }}">Edit Profile</a>
                                     @if($hasRegistrations)
-                                    <a class="dropdown-item" href="{{ URL::to('/registration-member') }}">Your Member Package Registration</a>
+                                    <a class="dropdown-item" href="{{ URL::to('/registration-member') }}">My Registrations</a>
                                     @endif
-                                    
                                     <a class="dropdown-item" href="#">Your Status</a>
                                 </div>
                             </li>
