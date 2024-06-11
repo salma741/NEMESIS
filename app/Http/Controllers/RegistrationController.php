@@ -50,6 +50,7 @@ class RegistrationController extends Controller
         if ($startDate !== null && $endDate !== null) {
             $query->whereBetween('start_date', [$startDate . " 00:00:00", $endDate . " 23:59:59"]);
         }
+
     if ($request->has('active_status')) {
         if ($activeStatus == 'active') {
             $query->whereRaw('DATEDIFF(NOW(), DATE_ADD(registrations.start_date, INTERVAL member_packages.duration_day DAY)) < 0');

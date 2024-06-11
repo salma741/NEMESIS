@@ -32,6 +32,7 @@ class RegistrationMemberController extends Controller
             if ($startDate !== null && $endDate !== null) {
                 $query->whereBetween('start_date', [$startDate . " 00:00:00", $endDate . " 23:59:59"]);
             }
+            
         })
         ->orderby('start_date', 'desc')
         ->get();
