@@ -21,6 +21,7 @@
         <th width="5%">No</th>
         <th>Name</th>
         <th>Username</th>
+        <th>E-mail</th>
         <th>Address</th>
         <th>Phone</th>
         <th>Role</th>
@@ -33,6 +34,7 @@
             <td>{{ $index + 1 }}</td>
             <td>{{ $user->name }}</td>
             <td>{{ $user->username }}</td>
+            <td>{{ $user->email }}</td>
             <td>{{ $user->address }}</td>
             <td>{{ $user->contact }}</td>
             <td>{{ $user->role }}</td>

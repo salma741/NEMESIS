@@ -54,6 +54,7 @@ class AuthController extends Controller
 
     public function register(Request $request){
             $messages = [
+                'email.required' => 'Silakan isi E-mail.',
                 'name.required' => 'Silakan isi nama.',
                 'username.required' => 'Silakan isi username.',
                 'password.required' => 'Silakan isi password.',
@@ -65,6 +66,7 @@ class AuthController extends Controller
             $data = $request->validate([
                 'name' => 'required|string|max:255',
                 'username' => 'required',
+                'email' => 'required',
                 'password' => 'required|string|min:3',
                 'address' => 'required|string|max:255',
                 'contact' => 'required|string|max:15',
@@ -76,6 +78,7 @@ class AuthController extends Controller
                 'password' => Hash::make($data['password']),
                 'address' => $data['address'],
                 'contact' => $data['contact'],
+                'email' => $data['email'],
                 'type' => "0"
             ]);
             return redirect()->route('login');
