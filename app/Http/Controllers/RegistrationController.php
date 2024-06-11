@@ -254,14 +254,15 @@ class RegistrationController extends Controller
         return redirect()->route('registration-admin.index')->with('success', 'Check in berhasil dibuat.');
     }
 
-    public function trainerCheckIn(Request $request)
+    public function trainerCheckIn(Request $request,string $id)
     {
         $data = $request->validate([
             'registration_id' => 'required'
         ]);
 
         CheckTrainerStatus::create($data);
-
+        MemberPackage::find($id);
+        
         return redirect()->route('registration-admin.index')->with('success', 'Check in trainer berhasil dibuat.');
     }    
 }
