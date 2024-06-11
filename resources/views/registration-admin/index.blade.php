@@ -13,6 +13,35 @@
         {{ session("errorMessage") }}
     </div>
 @endif 
+<form method="GET" action="{{ URL::to('registration-admin') }}">
+    <div class="row">
+        <div class="col-2">
+            <div class="form-group">
+                <label for="start_date">Start Date</label>
+                <input type="date" id="start_date" name="start_date" class="form-control" value="{{DateFormat($startDate, "Y-MM-DD")}}">               
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="form-group">
+                <label for="end_date">End Date</label>
+                <input type="date" id="end_date" name="end_date" class="form-control" value="{{DateFormat($endDate, "Y-MM-DD")}}">               
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="form-group">
+                <label for="active_status">Status</label>
+                <select id="active_status" name="active_status" class="form-control">
+                    <option value="all" {{ $activeStatus == 'all' ? 'selected' : '' }}>All</option>
+                    <option value="active" {{ $activeStatus == 'active' ? 'selected' : '' }}>Active</option>
+                    <option value="inactive" {{ $activeStatus == 'inactive' ? 'selected' : '' }}>Inactive</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-2 mt-3">
+            <button type="submit" class="btn btn-primary" style="margin-top: 16px;">Filter</button>
+        </div>            
+    </div>
+</form>
 
 <a href="{{ URL::to('registration-admin/create') }}" class="btn btn-primary mb-3">
     <i class="fas fa-plus" aria-hidden="true"></i> Add
