@@ -24,8 +24,8 @@ class RegistrationController extends Controller
     $activeStatus = $request->input('active_status');
     $now = \Carbon\Carbon::now();
 
-    $startDate = $startDate ? $startDate : $now->format('Y-m-d');
-    $endDate = $endDate ? $endDate : $now->format('Y-m-d');
+    $startDate = $startDate ?: null;
+    $endDate = $endDate ?: null;
 
     $query = DB::table('registrations')
         ->leftJoin('users as admin', 'admin.id', '=', 'registrations.user_id')
@@ -46,10 +46,10 @@ class RegistrationController extends Controller
             'trainers.name as trainer_name',
             'registrations.price',
             'registrations.id'
-        ])->whereBetween('start_date', [$startDate . " 00:00:00", $endDate . " 23:59:59"])->orderby('start_date', 'desc');
-    // if ($request->has('startDate') && $request->has('endDate')) {
-    //     $query->whereBetween('registrations.start_date', [$startDate . ' 00:00:00', $endDate . ' 23:59:59']);
-    // }
+        ]);
+        if ($startDate !== null && $endDate !== null) {
+            $query->whereBetween('start_date', [$startDate . " 00:00:00", $endDate . " 23:59:59"]);
+        }
     if ($request->has('active_status')) {
         if ($activeStatus == 'active') {
             $query->whereRaw('DATEDIFF(NOW(), DATE_ADD(registrations.start_date, INTERVAL member_packages.duration_day DAY)) < 0');
@@ -59,8 +59,7 @@ class RegistrationController extends Controller
     } elseif ($activeStatus == 'all') {
         // Tidak ada filter status yang diterapkan
     }
-
-    $registrations = $query->get();
+    $registrations = $query->orderby('start_date', 'desc')->get();
 
     $data = [
         'title' => 'Member Registrations Data',
@@ -160,7 +159,7 @@ class RegistrationController extends Controller
         'registration' => $registration,
         'memberPackages' => MemberPackage::all(),
         'trainers' => Trainer::all(),
-        'users' => User::all(),
+        'users' => User::where('role', 'member')->get(),
     ];
 
     return view('registration-admin.form', $data);
