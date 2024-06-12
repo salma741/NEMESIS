@@ -13,33 +13,33 @@
                 {{ session("errorMessage") }}
             </div>
 @endif 
-<a href="{{ URL::to('check-status/create') }}" class="btn btn btn-primary mb-3">
-<i class="fas fa-plus" aria-hidden="true"></i> Add</a>
+
 <table id="datatable1" class="table table-bordered table-striped">
     <thead>
     <tr>
         <th width="5%">No</th>
+        <th>Registration Id</th>
         <th>Nama Customer</th>
         <th>Nama Trainer</th>
         <th>Jumlah pertemuan Trainer</th>
+        <th>Masa Trainer</th>
         <th>Tanggal check-in</th>
         <th width="10%">Action</th>
     </tr>
     </thead>
     <tbody>
         @foreach($checkstatuss as $index => $check )
+
          <tr>
             <td>{{ $index + 1 }}</td>
-            <td class="align-middle"></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td class="align-middle">{{$check->registration_id }}</td>
+            <td>{{$check->registration->member->name }}</td>
+            <td>{{$check->registration->trainer->name}}</td>
+            <td>{{$check->registration->memberPackage->duration_trainer}}</td>
+            <td>{{$total}}</td>
+            <td>{{$check->registration->created_at}}</td>
             <td>
                 <div class="d-flex">
-                <a href="{{ URL::to('check-status/' . $check->id) }}" class="btn btn-sm btn-info mr-2">
-                Show</a>
-                <a href="{{ URL::to('check-status/' . $check->id. '/edit') }}" class="btn btn-sm btn-warning mr-2">
-                Edit</a>
                 <form action="{{ URL::to('check-status/' . $check->id) }}" method="post">
                     @csrf
                     @method('delete')
