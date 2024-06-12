@@ -436,7 +436,8 @@ h4 {
 }
 
 .custom-image-size {
-    width: 350px; /* Atur lebar gambar sesuai kebutuhan Anda */
-    height: 350px; /* Atur tinggi gambar sesuai kebutuhan Anda */
-    object-fit: cover; /* Menjaga proporsi gambar */
+    width: 100px; /* Atur lebar gambar sesuai kebutuhan Anda */
+    height: 100px; /* Atur tinggi gambar sesuai kebutuhan Anda */
+    border-radius: 50%; /* Membuat gambar berbentuk lingkaran */
+    object-fit: cover;
 }

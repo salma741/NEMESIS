@@ -13,7 +13,7 @@
                 {{ session("errorMessage") }}
             </div>
 @endif 
-
+<div style="overflow-x: auto;">
 <table id="datatable1" class="table table-bordered table-striped">
     <thead>
     <tr>
@@ -21,9 +21,10 @@
         <th>Registration Id</th>
         <th>Nama Customer</th>
         <th>Nama Trainer</th>
-        <th>Jumlah pertemuan Trainer</th>
+        <th>Durasi Trainer</th>
         <th>Masa Trainer</th>
-        <th>Tanggal check-in</th>
+        <th>Tanggal Check-in</th>
+        <th>Tanggal Check-out</th>
         <th width="10%">Action</th>
     </tr>
     </thead>
@@ -37,7 +38,8 @@
             <td>{{$check->registration->trainer->name}}</td>
             <td>{{$check->registration->memberPackage->duration_trainer}}</td>
             <td>{{$total}}</td>
-            <td>{{$check->registration->created_at}}</td>
+            <td>{{DateFormat ($check->registration->created_at)}}</td>
+            <td>{{DateFormat ($check->registration->updated_at)}}</td>
             <td>
                 <div class="d-flex">
                 <form action="{{ URL::to('check-status/' . $check->id) }}" method="post">
@@ -52,6 +54,6 @@
         @endforeach
     </tbody>
 </table>
-
+</div>
 
 @endsection

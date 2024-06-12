@@ -11,9 +11,9 @@ use Illuminate\Queue\SerializesModels;
 
 class SendEmail extends Mailable
 {
-    use Queueable, SerializesModels;
+    use Queueable;
+    use SerializesModels;
     public $data;
-
     /**
      * Create a new message instance.
      */
@@ -28,7 +28,7 @@ class SendEmail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Send Email',
+            subject: $this->data['subject'],
         );
     }
 
@@ -38,7 +38,7 @@ class SendEmail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: $this->data['view'],
         );
     }
 
