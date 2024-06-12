@@ -22,13 +22,20 @@ class RegistrationMemberController extends Controller
         $endDate = $request->input("endDate");
 
         $now = Carbon::now();
-        $startDate = $startDate? $startDate : $now;
-        $endDate = $endDate? $endDate : $now;
+        $startDate = $startDate ?: null;
+        $endDate = $endDate ?: null;
 
         $user = auth()->user();
         $registrations = Registration::with('memberPackage', 'trainer', 'user')
-            ->where('member_id', $user->id)->whereBetween('start_date', [$startDate . " 00:00:00", $endDate . " 23:59:59"])->orderby('start_date', 'desc')
-            ->get();
+        ->where('member_id', $user->id)
+        ->where(function ($query) use ($startDate, $endDate) {
+            if ($startDate !== null && $endDate !== null) {
+                $query->whereBetween('start_date', [$startDate . " 00:00:00", $endDate . " 23:59:59"]);
+            }
+            
+        })
+        ->orderby('start_date', 'desc')
+        ->get();
         $configurations = Configuration::all();
         $hasRegistrations = $registrations->isNotEmpty();
 
