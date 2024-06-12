@@ -19,12 +19,11 @@
     <tr>
         <th width="5%">No</th>
         <th>Registration Id</th>
-        <th>Nama Customer</th>
-        <th>Nama Trainer</th>
-        <th>Durasi Trainer</th>
-        <th>Masa Trainer</th>
-        <th>Tanggal Check-in</th>
-        <th>Tanggal Check-out</th>
+        <th>Customer Name</th>
+        <th>Trainer Name</th>
+        <th>Trainer Duration</th>
+        <th>Trainer Time</th>
+        <th>Check In Date</th>
         <th width="10%">Action</th>
     </tr>
     </thead>
@@ -39,7 +38,6 @@
             <td>{{$check->registration->memberPackage->duration_trainer}}</td>
             <td>{{$total}}</td>
             <td>{{DateFormat ($check->registration->created_at)}}</td>
-            <td>{{DateFormat ($check->registration->updated_at)}}</td>
             <td>
                 <div class="d-flex">
                 <form action="{{ URL::to('check-status/' . $check->id) }}" method="post">
