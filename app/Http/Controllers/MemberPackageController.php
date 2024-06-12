@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\SendEmail;
+use Illuminate\Support\Facades\Mail;
 use App\Models\MemberPackage;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -18,6 +20,12 @@ class MemberPackageController extends Controller
         ];
 
         return view('member-package.index', $data);
+        // $data = [
+        //     "subject" => "Member Package Registration",
+        //     "view" => "email",
+        //     "description" => "Ini adalah Registrasi Member Anda"
+        // ];
+        // Mail::to('parkanniko89@gmail.com')->send(new SendEmail($data));
     }
 
     /**

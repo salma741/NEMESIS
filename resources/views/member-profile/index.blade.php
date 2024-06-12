@@ -19,6 +19,10 @@
             </div>
         </div>
         <div class="form-group">
+            <label for="email">Email</label>
+            <input type="text" id="email" name="email" class="form-control" value="{{ Auth::user()->email }}" readonly>
+        </div>
+        <div class="form-group">
             <label for="name">Name</label>
             <input type="text" id="name" name="name" class="form-control" value="{{ Auth::user()->name }}" readonly>
         </div>
