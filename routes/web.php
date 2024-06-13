@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\MemberProfileController;
+use App\Http\Controllers\SocialiteController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
@@ -33,6 +34,14 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/member-profile', [MemberProfileController::class, 'show'])->name('member-profile');
 Route::get('/member-profile/edit', [MemberProfileController::class, 'edit'])->name('member-profile.edit');
 Route::post('/member-profile/edit', [MemberProfileController::class, 'update'])->name('member-profile.update');
+
+Route::get('authorized/google/redirect', [SocialiteController::class, 'redirect'])
+    ->middleware(['guest'])
+    ->name('redirect');
+
+Route::get('authorized/google/callback', [SocialiteController::class, 'callback'])
+    ->middleware(['guest'])
+    ->name('callback');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.index');

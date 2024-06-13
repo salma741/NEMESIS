@@ -48,6 +48,17 @@
                 @enderror
             </div>
             <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" class="form-control
+                @error('password')is-invalid @enderror" >
+
+                @error('password')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+                @enderror
+            </div>
+            <div class="form-group">
                 <label for="address">Address</label>
                 <input type="text" id="address" name="address" class="form-control @error('address') is-invalid @enderror" value="{{ old('address', $user->address) }}">
                 @error('address')
