@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Sign Up</title>
+    <title>Login</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
@@ -30,6 +30,7 @@
                         <input type="password" class="form-control" id="password" name="password" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Login</button>
+                    <a href="{{ route('redirect') }}" class="btn btn-danger">Login With Google</a>
                 </form>
                 <button class="btn btn-link" id="showRegisterForm">Don't have an account? Register</button>
             </div>

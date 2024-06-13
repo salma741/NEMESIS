@@ -51,6 +51,7 @@ class UserController extends Controller
             ];
         $data = $request->validate([
             'name' => 'required',
+            'image' => 'sometimes',
             'username' => 'required|alpha_num|unique:users',
             'password' => 'required|min:2',
             'address' => 'required',
@@ -115,7 +116,8 @@ class UserController extends Controller
             'password' => 'nullable|min:2',
             'address' => 'required',
             'contact' => 'required',
-            'role' => 'required'
+            'role' => 'required',
+            'image' => 'sometimes',
         ], $messages);
 
         try{

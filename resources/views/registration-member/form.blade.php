@@ -49,7 +49,7 @@
     </div> 
     <div class="row">
         <div class="col-3">
-            <button type="submit" class="btn btn-danger">Save</button>
+        <button class="btn btn-primary submit-btn" id="pay-button">Bayar Sekarang</button>
         </div>
         <div class="col-9">
             <a href="{{ URL::to('registration-member') }}" class="btn btn-secondary ml-3">Back</a>
@@ -77,4 +77,31 @@
     }
 </script>
 
+<script type="text/javascript">
+  // For example trigger on button clicked, or any time you need
+  var payButton = document.getElementById('pay-button');
+  payButton.addEventListener('click', function () {
+    // Trigger snap popup. @TODO: Replace TRANSACTION_TOKEN_HERE with your transaction token
+    window.snap.pay('{{ $snapToken }}', {
+      onSuccess: function(result){
+        /* You may add your own implementation here */
+        alert("Pembayaran Sukses!");
+const url = '<?= URL::to('/success-booking/' . $receipt->id); ?>';
+        window.open(url,  '_self');        
+      },
+      onPending: function(result){
+        /* You may add your own implementation here */
+        alert("Sedang menunggu pembayaran anda!"); console.log(result);
+      },
+      onError: function(result){
+        /* You may add your own implementation here */
+        alert("Pembayaran Gagal!"); console.log(result);
+      },
+onClose: function(){
+        /* You may add your own implementation here */
+        alert('Anda menutup pop up tanpa melakukan pembayaran');
+      }
+    })
+  });
+</script>
 @endsection
