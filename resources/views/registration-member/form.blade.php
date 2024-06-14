@@ -86,7 +86,7 @@
       onSuccess: function(result){
         /* You may add your own implementation here */
         alert("Pembayaran Sukses!");
-const url = '<?= URL::to('/success-booking/' . $receipt->id); ?>';
+const url = '<?= URL::to('/success-booking/' . $memberPackage->id); ?>';
         window.open(url,  '_self');        
       },
       onPending: function(result){
