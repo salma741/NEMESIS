@@ -56,6 +56,10 @@ Route::controller(AuthController::class)->group(function() {
     Route::post('login', 'login');
     Route::post('register', 'register')->name('register');
     Route::get('logout', 'logout')->name('logout')->middleware('auth');
+    Route::post('/forgot-password-act', 'forgot_password_act')->name('forgot-password-act');
+    Route::get('/forgot-password', 'forgot_password')->name('forgot-password');
+    Route::get('/validasi-forgot-password/{token}', 'validasi_forgot_password')->name('validasi-forgot-password');
+    Route::post('/validasi-forgot-password-act', 'validasi_forgot_password_act')->name('validasi-forgot-password-act');
 });
 
 Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
