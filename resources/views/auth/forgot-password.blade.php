@@ -46,7 +46,7 @@
                             <form action="{{ URL::to('/forgot-password-act') }}" method="POST">
                                 @csrf
                                 <div class="form-group mt-4">
-                                    <label for="email">Email:</label>
+                                    <label for="email">Email</label>
                                     <input type="email" class="form-control" id="email" name="email" required>
                                 </div>
                                 <div class="row">

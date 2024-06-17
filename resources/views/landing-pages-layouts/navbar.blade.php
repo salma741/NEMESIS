@@ -1,3 +1,7 @@
+@php
+    $currentRoute = Route::currentRouteName();
+    $routePrefix = explode('.', $currentRoute)[0];
+@endphp
 <header class="header-area header-sticky">
         <div class="container">
             <div class="row">
@@ -10,7 +14,11 @@
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
-                            <li class="scroll-to-section"><a href="{{ route('home') }}" class="active">Home</a></li>
+                            <li class="scroll-to-section"><a href="{{ route('home') }}" class="{{ $currentRoute == 'home' ? 'active' : '' }}">Home</a></li>
+                            @if ($currentRoute == 'member-profile' || $routePrefix == 'registration-member')
+                                <li class="scroll-to-section"><a href="{{ route('member-profile') }}" class="{{ $currentRoute == 'member-profile' ? 'active' : '' }}">Your Profile</a></li>
+                                <li class="main-button"><a href="{{ route('logout') }}">Logout</a></li>
+                            @else
                             <li class="scroll-to-section"><a href="#features">Program</a></li>
                             <li class="scroll-to-section"><a href="#our-classes">Supplement</a></li>
                             <li class="scroll-to-section"><a href="#schedule">Membership</a></li>
@@ -20,6 +28,7 @@
                             <li class="main-button"><a href="{{ route('logout') }}">Logout</a></li>
                             @else
                             <li class="main-button"><a href="{{ route('login') }}">Login</a></li>
+                            @endif
                             @endif
                         </ul>        
                         <a class='menu-trigger'>

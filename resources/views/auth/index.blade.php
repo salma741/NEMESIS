@@ -41,11 +41,11 @@
                             <form action="{{ URL::to('/login') }}" method="POST">
                                 @csrf
                                 <div class="form-group mt-4">
-                                    <label for="username">Username:</label>
+                                    <label for="username">Username</label>
                                     <input type="text" class="form-control" id="username" name="username" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="password">Password:</label>
+                                    <label for="password">Password</label>
                                     <input type="password" class="form-control" id="password" name="password" required>
                                 </div>
                                     <p class="mb-2">
@@ -78,27 +78,27 @@
                             <form action="{{ route('register') }}" method="POST">
                                 @csrf
                                 <div class="form-group">
-                                    <label for="email">E-mail:</label>
+                                    <label for="email">E-mail</label>
                                     <input type="email" class="form-control" id="email" name="email" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="name">Name:</label>
+                                    <label for="name">Name</label>
                                     <input type="text" class="form-control" id="name" name="name" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="username">Username:</label>
+                                    <label for="username">Username</label>
                                     <input type="text" class="form-control" id="username" name="username" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="password">Password:</label>
+                                    <label for="password">Password</label>
                                     <input type="password" class="form-control" id="password" name="password" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="address">Address:</label>
+                                    <label for="address">Address</label>
                                     <input type="text" class="form-control" id="address" name="address" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="contact">Contact:</label>
+                                    <label for="contact">Contact</label>
                                     <input type="text" class="form-control" id="contact" name="contact" required>
                                 </div>
                                 <div class="row">

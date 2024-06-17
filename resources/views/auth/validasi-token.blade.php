@@ -47,7 +47,7 @@
                                 @csrf
                                 <input type="hidden" value="{{$token}}">
                                 <div class="form-group mt-4">
-                                    <label for="password">Password Baru:</label>
+                                    <label for="password">Password Baru</label>
                                     <input type="password" class="form-control" id="password" name="password" required>
                                 </div>
                                 <div class="row">
