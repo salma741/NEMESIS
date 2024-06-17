@@ -22,7 +22,7 @@ class RegistrationController extends Controller
     $startDate = $request->input('start_date');
     $endDate = $request->input('end_date');
     $activeStatus = $request->input('active_status');
-    $now = \Carbon\Carbon::now();
+    $now = Carbon::now();
 
     $startDate = $startDate ?: null;
     $endDate = $endDate ?: null;
@@ -254,14 +254,13 @@ class RegistrationController extends Controller
         return redirect()->route('registration-admin.index')->with('success', 'Check in berhasil dibuat.');
     }
 
-    public function trainerCheckIn(Request $request,string $id)
+    public function trainerCheckIn(Request $request)
     {
         $data = $request->validate([
             'registration_id' => 'required'
         ]);
 
         CheckTrainerStatus::create($data);
-        MemberPackage::find($id);
         
         return redirect()->route('registration-admin.index')->with('success', 'Check in trainer berhasil dibuat.');
     }    

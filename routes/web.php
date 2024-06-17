@@ -80,6 +80,9 @@ Route::middleware(['auth', 'user-access:super admin'])->group(function () {
     Route::get('admin/home', [AdminController::class, 'adminHome'])->name('admin/home');
     Route::resource('/user', UserController::class);
     Route::resource('/check-status', CheckStatusController::class);
+    Route::delete('/check-status-delete/{id}', [CheckStatusController::class, 'destroyCs']);
+    Route::delete('/check-status-trainer-delete/{id}', [CheckStatusController::class, 'destroyCst']);
+
     Route::resource('member-package', MemberPackageController::class);
     Route::resource('program', ProgramController::class);
     Route::resource('/registration-admin', RegistrationController::class);

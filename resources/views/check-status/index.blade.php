@@ -21,7 +21,6 @@
         <th>Registration Id</th>
         <th>Customer Name</th>
         <th>Trainer Name</th>
-        <th>Trainer Duration</th>
         <th>Check In Date</th>
         <th width="10%">Action</th>
     </tr>
@@ -32,13 +31,12 @@
          <tr>
             <td>{{ $index + 1 }}</td>
             <td class="align-middle">{{$check->registration_id }}</td>
-            <td>{{$check->registration->member->name }}</td>
-            <td>{{$check->registration->trainer->name}}</td>
-            <td>{{$check->registration->memberPackage->duration_trainer}}</td>
-            <td>{{DateFormat ($check->registration->created_at)}}</td>
+            <td>{{$check->name }}</td>
+            <td>{{$check->trainer_name}}</td>
+            <td>{{DateFormat ($check->created_at)}}</td>
             <td>
                 <div class="d-flex">
-                <form action="{{ URL::to('check-status/' . $check->id) }}" method="post">
+                <form action="{{ (URL::to($check->typeCs == '0'? 'check-status-delete' : 'check-status-trainer-delete') . '/' . $check->id) }}" method="post">
                     @csrf
                     @method('delete')
                     <button type="submit" class="btn btn-sm btn-danger"
