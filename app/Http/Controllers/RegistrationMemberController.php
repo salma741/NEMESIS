@@ -73,63 +73,63 @@ class RegistrationMemberController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        //TODO: lanjutkan utk store, note: jika paket yg dipilih adl paket tanpa trainer, maka unset(trainer_id) selain itu lanjutkan
+{
+    // Validate the request data
+    $request->validate([
+        'member_package_id' => 'required|exists:member_packages,id',
+        'price' => 'required|numeric',
+        'trainer_id' => 'nullable|exists:trainers,id',
+    ]);
 
-        $request->validate([
-            'member_package_id' => 'required|exists:member_packages,id',
-            'price' => 'required|numeric',
-            'trainer_id' => 'nullable|exists:trainers,id',
-        ]);
+    $memberPackage = MemberPackage::find($request->member_package_id);
+    $data = [
+        'user_id' => null,
+        'member_id' => Auth::id(),
+        'member_package_id' => $request->member_package_id,
+        'price' => $request->price,
+        'start_date' => now(),
+        'status' => 'unpaid',
+    ];
 
-        $memberPackage = MemberPackage::find($request->member_package_id);
-        $data = [
-            'user_id' => null,
-            'member_id' => Auth::id(),
-            'member_package_id' => $request->member_package_id,
-            'price' => $request->price,
-            'start_date' => now(),
-        ];
+    if ($memberPackage->is_with_trainer) {
+        $data['trainer_id'] = $request->trainer_id;
+    }
 
-        if ($memberPackage->is_with_trainer) {
-            $data['trainer_id'] = $request->trainer_id;
+    $registration = Registration::create($data);
+     // Set your Merchant Server Key
+     \Midtrans\Config::$serverKey = config('midtrans.server_key');
+     // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+     \Midtrans\Config::$isProduction = false;
+     // Set sanitization on (default)
+     \Midtrans\Config::$isSanitized = true;
+     // Set 3DS transaction for credit card to true
+     \Midtrans\Config::$is3ds = true;
+
+     $params = array(
+         'transaction_details' => array(
+             'order_id' => $registration->id,
+             'gross_amount' => $registration->price,
+         ),
+         'customer_details' => array(
+             'user_id' => $registration->user_id,
+             'name' => $registration->name,
+             'member_id' => $registration->member_id,
+             'member_package_id' => $registration->member_package_id,
+         ),
+     );
+
+     $snapToken = \Midtrans\Snap::getSnapToken($params);
+     return view('registration-member.checkout', ['title'=>"Pay member registration"], compact('snapToken', 'registration'));
+    }
+
+    public function callback(Request $request){
+        $serverKey = config('midtrans.server_key');
+        $hashed = hash('sha512', $request->order_id.$request->status_code.$request->gross_amount.$serverKey);
+        if($hashed == $request->signature_key){
+            if($request->transaction_status == 'capture'){
+                $registration = Registration::find($request->order_id);
+                $registration->update(['status' => 'paind']);
+            }
         }
-
-        Registration::create($data);
-
-        return redirect()->route('registration-member.index')->with('success', 'Registrasi berhasil dibuat.');
     }
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
-
-    
 }

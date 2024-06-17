@@ -71,6 +71,8 @@ Route::post('/contact', [ContactController::class, 'send'])->name('contact.send'
 Route::middleware(['auth', 'user-access:member'])->group(function () {
     Route::resource('/registration-member', RegistrationMemberController::class);
     Route::resource('/check-status-member', CheckStatusMemberController::class);
+    Route::post('/checkout', [RegistrationMemberController::class, 'checkout']);
+    
 });
 
 // Normal Admin Route List
