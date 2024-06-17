@@ -128,7 +128,7 @@ class RegistrationMemberController extends Controller
         if($hashed == $request->signature_key){
             if($request->transaction_status == 'capture'){
                 $registration = Registration::find($request->order_id);
-                $registration->update(['status' => 'paind']);
+                $registration->update(['status' => 'paid']);
             }
         }
     }
