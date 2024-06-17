@@ -16,7 +16,7 @@
         }
         .custom-text {
             color: #000;
-            font-size: 14px;
+            font-size: 13px;
         }
     </style>
 </head>
@@ -41,23 +41,23 @@
                             <form action="{{ URL::to('/login') }}" method="POST">
                                 @csrf
                                 <div class="form-group mt-4">
-                                    <label for="username">Username:</label>
+                                    <label for="username">Username</label>
                                     <input type="text" class="form-control" id="username" name="username" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="password">Password:</label>
+                                    <label for="password">Password</label>
                                     <input type="password" class="form-control" id="password" name="password" required>
                                 </div>
-                                    <p class="mb-1">
+                                    <p class="mb-2">
                                         <a href="{{route('forgot-password')}}" style="font-size: 12px; margin-top: 1%">forgot password?</a>
                                     </p>
                                 </div>
-                                <div class="row">
+                                <div class="row mb-3" id="loginButton">
                                     <div class="col-12 d-flex justify-content-center">
                                         <button type="submit" class="btn btn-primary btn-block">Login</button>
                                     </div>
                                 </div>
-                                <div class="row mt-2 mb-2">
+                                <div class="row mt-2 mb-2 google-login-button">
                                     <div class="col-12 d-flex justify-content-center">
                                         <a href="{{ route('redirect') }}" class="btn btn-transparent btn-outline-dark btn-block">
                                             <img src="assets/images/google.png" alt="Google Logo" style="width: 30px; height: 30px; margin-right: 10px;">
@@ -69,32 +69,36 @@
                             <span class="custom-text">Don't have an account?</span>
                             <button class="btn btn-link btn-sm" id="showRegisterForm">Register</button>
                         </div>
-                        <div id="registerForm" style="display:none;">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                    <div class="card-centered" id="registerForm" style="display:none;">
                             <h2 class="text-center">Register</h2>
                             <form action="{{ route('register') }}" method="POST">
                                 @csrf
                                 <div class="form-group">
-                                    <label for="email">E-mail:</label>
+                                    <label for="email">E-mail</label>
                                     <input type="email" class="form-control" id="email" name="email" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="name">Name:</label>
+                                    <label for="name">Name</label>
                                     <input type="text" class="form-control" id="name" name="name" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="username">Username:</label>
+                                    <label for="username">Username</label>
                                     <input type="text" class="form-control" id="username" name="username" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="password">Password:</label>
+                                    <label for="password">Password</label>
                                     <input type="password" class="form-control" id="password" name="password" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="address">Address:</label>
+                                    <label for="address">Address</label>
                                     <input type="text" class="form-control" id="address" name="address" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="contact">Contact:</label>
+                                    <label for="contact">Contact</label>
                                     <input type="text" class="form-control" id="contact" name="contact" required>
                                 </div>
                                 <div class="row">
@@ -102,10 +106,9 @@
                                         <button type="submit" class="btn btn-primary btn-block">Register</button>
                                     </div>
                                 </div>
-                            </form>
-                            <span class="custom-text">Already have an account?</span>
+                                <span class="small">Already have an account?</span>
                             <button class="btn btn-link btn-sm" id="showLoginForm">Login</button>
-                            
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -120,10 +123,20 @@
         $('#showRegisterForm').click(function() {
             $('#loginForm').hide();
             $('#registerForm').show();
+            $('.google-login-button').hide();
+            $('.custom-text').hide();
+            $('#showRegisterForm').hide();
+            $('#loginButton').hide();
+            
         });
         $('#showLoginForm').click(function() {
             $('#registerForm').hide();
             $('#loginForm').show();
+            $('.google-login-button').show();
+            $('.google-login-button').show();
+            $('.custom-text').show();
+            $('#showRegisterForm').show();
+            $('#loginButton').show();
         });
     });
 </script>
