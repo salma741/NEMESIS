@@ -68,7 +68,7 @@ Route::post('/contact', [ContactController::class, 'send'])->name('contact.send'
 
 // Normal Users Route List
 Route::middleware(['auth', 'user-access:member'])->group(function () {
-    Route::resource('/registration-member', RegistrationMemberController::class);  
+    Route::resource('/registration-member', RegistrationMemberController::class);
 });
 
 // Normal Admin Route List
