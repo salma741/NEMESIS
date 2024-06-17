@@ -32,7 +32,8 @@
             <th>Start Date</th>
             <th>End Date</th>        
             <th>Trainer</th>
-            <th>Price</th>     
+            <th>Price</th>
+            <th>Status</th>      
             <th>Admin</th>           
         </tr>
         </thead>
@@ -44,7 +45,8 @@
                 <td>{{ DateFormat($registration->start_date) }}</td>
                 <td>{{ AddDay($registration->start_date, $registration->memberPackage->duration_day) }}</td>            
                 <td>{{ isset($registration->trainer) ? $registration->trainer->name : '-' }}</td>
-                <td>{{ NumberFormat($registration->price) }}</td>    
+                <td>{{ NumberFormat($registration->price) }}</td>  
+                <td>{{ $registration->status }}</td>  
                 <td>{{ isset($registration->user) ? $registration->user->name : 'Self Registration' }}</td>                               
             </tr>
             @endforeach
