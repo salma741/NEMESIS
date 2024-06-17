@@ -22,7 +22,6 @@
         <th>Customer Name</th>
         <th>Trainer Name</th>
         <th>Trainer Duration</th>
-        <th>Trainer Time</th>
         <th>Check In Date</th>
         <th width="10%">Action</th>
     </tr>
@@ -36,7 +35,6 @@
             <td>{{$check->registration->member->name }}</td>
             <td>{{$check->registration->trainer->name}}</td>
             <td>{{$check->registration->memberPackage->duration_trainer}}</td>
-            <td>{{$total}}</td>
             <td>{{DateFormat ($check->registration->created_at)}}</td>
             <td>
                 <div class="d-flex">
