@@ -117,9 +117,9 @@ class RegistrationMemberController extends Controller
                 'member_package_id' => $registration->member_package_id,
             ),
         );
-
+        $name = Auth()->user()->name;
         $snapToken = \Midtrans\Snap::getSnapToken($params);
-        return view('registration-member.checkout', ['title' => "Pay member registration"], compact('snapToken', 'registration'));
+        return view('registration-member.checkout', ['title' => "Pay member registration"], compact('snapToken', 'registration', 'memberPackage'));
     }
 
     public function callback(Request $request)
