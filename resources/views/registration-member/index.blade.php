@@ -22,6 +22,9 @@
 <a href="{{ URL::to('registration-member/create') }}" class="btn btn-secondary mb-3">
     <i aria-hidden="true"></i> Add
 </a>
+<a href="{{ route('member-profile') }}" class="btn btn-secondary mb-3">
+    <i aria-hidden="true"></i> Back
+</a>
 
 <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
     <table class="table" width="100%">
