@@ -51,7 +51,7 @@ class CarouselController extends Controller
     
         try {
             if($request->hasFile('image')) {
-                $data['image'] = $request->file("image")->store('img');
+                $data['image'] = $request->file("image")->store('img', 'public');
             } else {
                 $data['image'] = null;
             }
@@ -96,7 +96,7 @@ class CarouselController extends Controller
     
         try {
             if($request->hasFile('image')) {
-                $data['image'] = $request->file("image")->store('img');
+                $data['image'] = $request->file("image")->store('img', 'public');
             } else {
                 $data['image'] = null;
             }
