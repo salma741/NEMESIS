@@ -56,7 +56,7 @@ class TrainerController extends Controller
     
         try {
             if ($request->hasFile('image')) {
-                $imagePath = $request->file('image')->store('img');
+                $imagePath = $request->file('image')->store('img', 'public');
                 $data['image'] = $imagePath;
             }
 
