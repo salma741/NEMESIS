@@ -11,7 +11,7 @@ class CarouselController extends Controller
     public function index()
     {
         $carousels = Carousel::orderby('title')->get();
-       
+
         $data = [
             'title' => 'Carousels',
             'carousels' => $carousels
@@ -40,15 +40,15 @@ class CarouselController extends Controller
         $messages = [
             'title.required' => 'Silakan isi nama.',
             'description.required' => 'Silakan isi deskripsi.',
-        ]; 
-    
+        ];
+
         $data = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
-            'image' => 'required|mimes:jpg,png,jpeg|max:1024',            
+            'image' => 'required|mimes:jpg,png,jpeg|max:1024',
         ], $messages);
 
-    
+
         try {
             if($request->hasFile('image')) {
                 $data['image'] = $request->file("image")->store('img', 'public');
@@ -68,8 +68,8 @@ class CarouselController extends Controller
     public function edit(string $id)
     {
         $carousel = Carousel::find($id);
-        if(!$carousel){
-            
+        if(!$carousel) {
+
             return redirect('carousel')->with("errorMessage", 'Carousel tidak dapat ditemukan');
         }
         $data = [
@@ -79,21 +79,21 @@ class CarouselController extends Controller
 
         return view('carousel.form', $data);
     }
-    
+
     public function update(Request $request, string $id)
     {
         $messages = [
             'title.required' => 'Silakan isi nama.',
             'description.required' => 'Silakan isi deskripsi.',
-        ]; 
-    
+        ];
+
         $data = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
-            'image' => 'required|mimes:jpg,png,jpeg|max:1024',            
+            'image' => 'required|mimes:jpg,png,jpeg|max:1024',
         ], $messages);
 
-    
+
         try {
             if($request->hasFile('image')) {
                 $data['image'] = $request->file("image")->store('img', 'public');
