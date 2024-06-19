@@ -9,7 +9,7 @@
                     <nav class="main-nav">
                         <!-- ***** Logo Start ***** -->
                         @foreach ($configurations as $index => $configuration )
-                        <a href="index.html" class="logo">{{ $configuration->name }}<em> Gym</em></a>
+                        <a href={{ route('home') }} class="logo">{{ $configuration->name }}<em> Gym</em></a>
                         @endforeach
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
