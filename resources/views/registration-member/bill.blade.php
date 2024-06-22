@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('landing-pages-layouts.main')
 @section('container')
 @include('sweetalert::alert')
 
@@ -74,6 +74,7 @@
             @enderror
     </div>
 
+
         <div class="form-group">
             <label for="trainer_id">Trainer</label>
             <select class="form-control @error('trainer_id')is-invalid @enderror" name="trainer_id" id="trainer_id" disabled>
@@ -98,7 +99,16 @@
             @enderror                   
         </div>
 
-        <a href="{{ URL::to('registration-admin') }}" class="btn btn-secondary">Back</a>
+        <div class="form-group">
+            <label for="status">Status</label>
+            <input type="text" id="status" name="status" class="form-control @error('status')is-invalid @enderror" value="{{$registration->status}}" readonly>
+            @error('status')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror                   
+        </div>
+        <a href="{{ URL::to('registration-member') }}" class="btn btn-secondary">Back</a>
     </div>
 </div>
 

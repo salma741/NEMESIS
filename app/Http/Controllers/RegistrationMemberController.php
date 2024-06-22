@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Carbon\Carbon;
 use App\Models\Trainer;
 use App\Models\Registration;
@@ -133,4 +134,29 @@ class RegistrationMemberController extends Controller
             }
         }
     }
+
+    public function show(string $id)
+    {
+        $registration = Registration::find($id);
+    if (!$registration) {
+        return redirect('registration-member')->with("errorMessage", 'Registrasi tidak ditemukan');
+    }
+    // $registration->start_date_formatted = Carbon::parse($registration->start_date)->format('d-m-Y H:i:s');
+    // $registration->end_date_formatted = Carbon::parse($registration->start_date)->addDays($registration->memberPackage->duration_day)->format('d-m-Y H:i:s');
+
+    $data = [
+        'title' => 'Bill Detail',
+        'registration' => $registration,
+        'memberPackages' => MemberPackage::all(),
+        'trainers' => Trainer::all(),
+        'users' => User::all(),
+        'status' => $registration->status,
+    ];
+
+    return view('registration-member.bill', $data);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
 }
