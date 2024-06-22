@@ -265,5 +265,3 @@ class RegistrationController extends Controller
         return redirect()->route('registration-admin.index')->with('success', 'Check in trainer berhasil dibuat.');
     }    
 }
-
-?>

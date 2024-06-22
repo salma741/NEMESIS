@@ -37,7 +37,8 @@
             <th>Trainer</th>
             <th>Price</th>
             <th>Status</th>      
-            <th>Admin</th>           
+            <th>Admin</th>
+            <th>Action</th>            
         </tr>
         </thead>
         <tbody>
@@ -50,7 +51,12 @@
                 <td>{{ isset($registration->trainer) ? $registration->trainer->name : '-' }}</td>
                 <td>{{ NumberFormat($registration->price) }}</td>  
                 <td>{{ $registration->status }}</td>  
-                <td>{{ isset($registration->user) ? $registration->user->name : 'Self Registration' }}</td>                               
+                <td>{{ isset($registration->user) ? $registration->user->name : 'Self Registration' }}</td>      
+                <td class="align-middle">
+                <div class="d-flex flex-wrap">
+                    <a href="{{ URL::to('registration-member/' . $registration->id) }}" class="btn btn-sm btn-info btn-width mr-2 mb-2">Bill</a>
+                    </div>
+                </td>                         
             </tr>
             @endforeach
         </tbody>
