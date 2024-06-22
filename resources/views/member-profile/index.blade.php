@@ -3,6 +3,7 @@
 <div class="main-button mb-3">
 @if($hasRegistrations)
 <a href="{{ URL::to('/registration-member') }}" class="btn btn-secondary">Your Registration</a>
+<a href="{{ URL::to('/check-status-member') }}" class="btn btn-secondary">Your Status</a>
 @endif
 </div>
 <div class="row mt-10">
