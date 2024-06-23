@@ -75,28 +75,27 @@ class AuthController extends Controller
             'contact.required' => 'Silakan isi kontak.',
         ];
 
-        $data = $request->validate([
+        $data =  $request->validate([
+            'email' => 'required|email|unique:users,email',
             'name' => 'required|string|max:255',
-            'username' => 'required',
-            'email' => 'required',
-            'password' => 'required|string|min:3',
+            'username' => 'required|string|max:255|unique:users,username',
+            'password' => 'required|string|min:6|confirmed',
             'address' => 'required|string|max:255',
-            'contact' => 'required|string|max:15',
-        ], $messages);
-
-        $user = User::create([
-            'name' => $data['name'],
-            'username' => $data['username'],
-            'password' => Hash::make($data['password']),
-            'address' => $data['address'],
-            'contact' => $data['contact'],
-            'email' => $data['email'],
-            'type' => "0"
+            'contact' => 'required|string|max:255',
         ]);
 
-        return redirect()->route('login');
-    }
+        // Jika validasi lolos, buat user baru
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'username' => $request->username,
+            'password' => Hash::make($request->password),
+            'address' => $request->address,
+            'contact' => $request->contact,
+        ]);
 
+        return redirect()->route('login')->with('success', 'Registration successful. Please login.');
+    }
     public function forgot_password(){
         return view('auth.forgot-password');
     }

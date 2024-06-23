@@ -190,16 +190,29 @@
             </a>
         </form>
     </div>
-    <div id="registerContainer" class="form-container register-container" style="display:none;margin: 150px;">
+    <div id="registerContainer" class="form-container register-container" style="display:none; margin: 150px;">
         <div class="text-center">
             <h1><i>SIGN-UP</i></h1>
             <h2>YOUR ACCOUNT</h2>
         </div>
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <form action="{{ route('register') }}" method="POST">
             @csrf
             <div class="form-group">
                 <label for="email" class="form-label">E-mail</label>
                 <input type="email" class="form-control" id="email" name="email" required>
+                <!-- Menampilkan Pesan Error -->
+                @if ($errors->has('email'))
+                    <span class="text-danger">{{ $errors->first('email') }}</span>
+                @endif
             </div>
             <div class="form-group">
                 <label for="name" class="form-label">Name</label>
@@ -208,6 +221,10 @@
             <div class="form-group">
                 <label for="username" class="form-label">Username</label>
                 <input type="text" class="form-control" id="username" name="username" required>
+                <!-- Menampilkan Pesan Error -->
+                @if ($errors->has('username'))
+                    <span class="text-danger">{{ $errors->first('username') }}</span>
+                @endif
             </div>
             <div class="form-group">
                 <label for="password" class="form-label">Password</label>
@@ -228,7 +245,6 @@
             </div>
             <span class="small">Already have an account? <button class="btn btn-link btn-sm" id="showLoginForm" type="button">Login</button></span>
         </form>
-    </div>
 
     <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

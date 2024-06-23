@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Models\MemberPackage;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class RegistrationController extends Controller
 {
@@ -273,5 +274,35 @@ class RegistrationController extends Controller
         CheckTrainerStatus::create($data);
         
         return redirect()->route('registration-admin.index')->with('success', 'Check in trainer berhasil dibuat.');
-    }    
+    } 
+    
+    // Di dalam controller RegisterController.php
+    public function register(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email|unique:users,email',
+            'name' => 'required|string|max:255',
+            'username' => 'required|string|max:255|unique:users,username',
+            'password' => 'required|string|min:6|confirmed',
+            'address' => 'required|string|max:255',
+            'contact' => 'required|string|max:255',
+        ]);
+    
+        // Jika validasi lolos, buat user baru
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'username' => $request->username,
+            'password' => Hash::make($request->password),
+            'address' => $request->address,
+            'contact' => $request->contact,
+        ]);
+    
+        return redirect()->route('login')->with('success', 'Registration successful. Please login.');
+    }
+    
+
+
+
 }
+
